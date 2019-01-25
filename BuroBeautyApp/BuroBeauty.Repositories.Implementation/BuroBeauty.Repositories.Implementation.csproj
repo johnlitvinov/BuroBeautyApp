@@ -50,6 +50,10 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BuroBeauty.DB.Entities\BuroBeauty.DB.Entities.csproj">
+      <Project>{9AEF2A9C-5DDE-4690-B126-EAB8BEFA506C}</Project>
+      <Name>BuroBeauty.DB.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BuroBeauty.Repositories\BuroBeauty.Repositories.csproj">
       <Project>{5ed4e374-53a5-4c52-b661-4b1d8fca452a}</Project>
       <Name>BuroBeauty.Repositories</Name>

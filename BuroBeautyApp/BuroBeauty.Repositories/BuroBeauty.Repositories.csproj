@@ -46,5 +46,11 @@
     <Compile Include="IServiceRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BuroBeauty.DB.Entities\BuroBeauty.DB.Entities.csproj">
+      <Project>{9aef2a9c-5dde-4690-b126-eab8befa506c}</Project>
+      <Name>BuroBeauty.DB.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
