@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BuroBeauty.BLL
 {
-    public class Class1
+    public interface IServiceManager
     {
     }
 }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BuroBeauty.Repositories
+namespace BuroBeauty.BLL
 {
-    public class Class1
+    public interface IOrderManager
     {
     }
 }
