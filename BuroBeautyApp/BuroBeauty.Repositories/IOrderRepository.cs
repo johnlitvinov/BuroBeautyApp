@@ -14,7 +14,7 @@ namespace BuroBeauty.Repositories
 
         void DeleteOrder(int? id);
         Order GetOrderById(int? id);
-        Order GreateOrder(Order order);
+        Order CreateOrder(Order order);
         Order UpdateOrder(Order order);
         List<Order> GetOrderDate(DateTime? date);
         

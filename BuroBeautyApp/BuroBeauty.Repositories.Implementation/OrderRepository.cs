@@ -51,9 +51,10 @@ namespace BuroBeauty.Repositories.Implementation
             throw new NotImplementedException();
         }
 
-        public Order GreateOrder(Order order)
+        public Order CreateOrder(Order order)
         {
-            string sqlQuery = String.Format("Insert into Order (ServiceId,MasterId,PurchaseDate,ServiceAmount) Values('{0}', '{1}', {2}, {3} );",
+            string sqlQuery = String.Format("Insert into [dbo].[Order] (ServiceId,MasterId,PurchaseDate,ServiceAmount) Values('{0}', '{1}', '{2}', {3} ); " +
+                                            "SELECT SCOPE_IDENTITY()",
                 order.ServiceId, order.MasterId, order.PurchaseDate.ToString("yyyy-MM-dd hh:mm:ss"), order.ServiceAmount);
 
             //Create and open a connection to SQL Server 
@@ -64,7 +65,9 @@ namespace BuroBeauty.Repositories.Implementation
             SqlCommand command = new SqlCommand(sqlQuery, connection);
 
             //Execute the command to SQL Server and return the newly created ID
-            command.ExecuteNonQuery();
+            var id = (decimal)command.ExecuteScalar();
+           
+            order.Id = Decimal.ToInt32(id);
 
             //Close and dispose
             command.Dispose();
