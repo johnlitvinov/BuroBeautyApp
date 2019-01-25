@@ -21,6 +21,16 @@ namespace BuroBeauty.Repositories.IntegrationTests
             var result =  _orderRepository.GetAllOrders();
 
             Assert.IsNotNull(result);
+            Assert.IsTrue(result.Length > 0);
         }
+
+
+        [TestMethod]
+        public void DeleteTest()
+        {
+            _orderRepository.DeleteOrder(2);
+        }
+
+
     }
 }

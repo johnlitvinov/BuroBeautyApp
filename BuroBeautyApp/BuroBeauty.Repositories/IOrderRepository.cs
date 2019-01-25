@@ -10,5 +10,13 @@ namespace BuroBeauty.Repositories
     public interface IOrderRepository
     {
         OrderListItem[] GetAllOrders();
+
+
+        void DeleteOrder(int? id);
+        Order GetOrderById(int? id);
+        Order GreateOrder(Order order);
+        Order UpdateOrder(Order order);
+        List<Order> GetOrderDate(DateTime? date);
+        
     }
 }
