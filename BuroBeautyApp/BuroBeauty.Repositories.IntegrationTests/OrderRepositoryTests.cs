@@ -17,22 +17,6 @@ namespace BuroBeauty.Repositories.IntegrationTests
         }
 
         [TestMethod]
-        public void GetAllOrdersTest()
-        {
-            var result = _orderRepository.GetAllOrders();
-
-            Assert.IsNotNull(result);
-            Assert.IsTrue(result.Length > 0);
-        }
-
-
-        [TestMethod]
-        public void DeleteTest()
-        {
-            _orderRepository.DeleteOrder(3);
-        }
-
-        [TestMethod]
         public void CreateOrderTest()
         {
             Order order = new Order();
@@ -48,16 +32,16 @@ namespace BuroBeauty.Repositories.IntegrationTests
         [TestMethod]
         public void UpdateOrderTest()
         {
+            Order order = _orderRepository.GetOrderById(147);
+            order.ServiceAmount = 10;
+            _orderRepository.UpdateOrder(order);
+            var resultOrder = _orderRepository.GetOrderById(147);
+            Assert.IsNotNull(resultOrder);
+            Assert.IsTrue(resultOrder.ServiceAmount==10);
         }
-
-        [TestMethod]
-        public void GetOrderByIdTest()
+        public void DeleteTest()
         {
-        }
-
-        [TestMethod]
-        public void GetOrderDateTest()
-        {
+            _orderRepository.DeleteOrder(3);
         }
     }
 }

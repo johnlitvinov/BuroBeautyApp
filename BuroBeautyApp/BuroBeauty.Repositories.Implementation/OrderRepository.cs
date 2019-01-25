@@ -16,39 +16,71 @@ namespace BuroBeauty.Repositories.Implementation
                                            "Initial Catalog = BuroBeautyApp; " +
                                            @"server=localhost\SQLEXPRESS";
         
-        public void DeleteOrder(int? id)
+        public Order GetOrderById(int? id)
         {
-            //Create the SQL Query for deleting an article
-            string sqlQuery = String.Format("DELETE from [dbo].[Order] where Id = '{0}'", id);
-       
+            //Create the SQL Query for returning an article category based on its primary key
+            string sqlQuery = "SELECT * from [dbo].[Order] where ID = " + id;
+
+            Order result = null;
+
             //Create and open a connection to SQL Server 
             SqlConnection connection = new SqlConnection(_connectionString);
             connection.Open();
 
-            //Create a Command object
             SqlCommand command = new SqlCommand(sqlQuery, connection);
 
-            // Execute the command
-            int rowsDeletedCount = command.ExecuteNonQuery();
-            if (rowsDeletedCount != 0)
-            //    result = true;
+            SqlDataReader dataReader = command.ExecuteReader();
 
-            // Close and dispose
-            command.Dispose();
+            //load into the result object the returned row from the database
+            if (dataReader.HasRows)
+            {
+                dataReader.Read();
+                result = new Order();
+                result.Id = Convert.ToInt32(dataReader["id"]);
+                result.ServiceId = Convert.ToInt32(dataReader["ServiceId"]);
+                result.MasterId = Convert.ToInt32(dataReader["MasterId"]);
+                result.PurchaseDate = Convert.ToDateTime(dataReader["PurchaseDate"]);
+                result.ServiceAmount = Convert.ToDecimal(dataReader["ServiceAmount"]);
+            }
             connection.Close();
-            connection.Dispose();
+            return result;
         }
 
-        
-
-        public Order GetOrderById(int? id)
+        public List<Order> GetOrdersByDate(DateTime? date)
         {
-            throw new NotImplementedException();
-        }
+            var result = new List<Order>();
+            //Create the SQL Query for returning an article category based on its primary key
+            string sqlQuery = "SELECT * from [dbo].[Order] ";
 
-        public List<Order> GetOrderDate(DateTime? date)
-        {
-            throw new NotImplementedException();
+            if (date != null)
+            {
+                sqlQuery += string.Format(" where PurchaseDate between '{0}' AND '{1}'", date.Value.ToString("yyyy-MM-dd"), date.Value.AddDays(1).ToString("yyyy-MM-dd"));
+            }
+
+            //Create and open a connection to SQL Server 
+            SqlConnection connection = new SqlConnection(_connectionString);
+            connection.Open();
+
+            SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+            SqlDataReader dataReader = command.ExecuteReader();
+
+            //load into the result object the returned row from the database
+            if (dataReader.HasRows)
+            {
+                while (dataReader.Read())
+                {
+                    var row = new Order();
+                    row.Id = Convert.ToInt32(dataReader["id"]);
+                    row.ServiceId = Convert.ToInt32(dataReader["ServiceId"]);
+                    row.MasterId = Convert.ToInt32(dataReader["MasterId"]);
+                    row.PurchaseDate = Convert.ToDateTime(dataReader["PurchaseDate"]);
+                    row.ServiceAmount = Convert.ToDecimal(dataReader["ServiceAmount"]);
+                    result.Add(row);
+                }
+            }
+            connection.Close();
+            return result;
         }
 
         public Order CreateOrder(Order order)
@@ -65,8 +97,7 @@ namespace BuroBeauty.Repositories.Implementation
             SqlCommand command = new SqlCommand(sqlQuery, connection);
 
             //Execute the command to SQL Server and return the newly created ID
-            var id = (decimal)command.ExecuteScalar();
-           
+            var id = (decimal) command.ExecuteScalar();
             order.Id = Decimal.ToInt32(id);
 
             //Close and dispose
@@ -78,14 +109,57 @@ namespace BuroBeauty.Repositories.Implementation
             return order;
         }
         
-        public Order UpdateOrder(Order order)
+        public void UpdateOrder(Order order)
         {
-            throw new NotImplementedException();
+            //Create the SQL Query for deleting an article
+            string sqlQuery = String.Format("Update [dbo].[Order] SET " +
+                                            "MasterId = {0}, " +
+                                            "ServiceId = {1}," +
+                                            " PurchaseDate = '{2}', " +
+                                            " ServiceAmount = {3} " +
+                                            "where ID = {4}",
+                                            order.MasterId,
+                                            order.ServiceId,
+                                            order.PurchaseDate.ToString("yyyy-MM-dd hh:mm:ss"),
+                                             order.ServiceAmount, 
+                                            order.Id);
+
+            //Create and open a connection to SQL Server 
+            SqlConnection connection = new SqlConnection(_connectionString);
+            connection.Open();
+
+            //Create a Command object
+            SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+            command.ExecuteNonQuery();
+           
+            //Close and dispose
+            command.Dispose();
+            connection.Close();
+            connection.Dispose();
         }
 
-        OrderListItem[] IOrderRepository.GetAllOrders()
+        public void DeleteOrder(int? id)
         {
-            throw new NotImplementedException();
+            //Create the SQL Query for deleting an article
+            string sqlQuery = String.Format("DELETE from [dbo].[Order] where Id = '{0}'", id);
+
+            //Create and open a connection to SQL Server 
+            SqlConnection connection = new SqlConnection(_connectionString);
+            connection.Open();
+
+            //Create a Command object
+            SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+            // Execute the command
+            int rowsDeletedCount = command.ExecuteNonQuery();
+            if (rowsDeletedCount != 0)
+                //    result = true;
+
+                // Close and dispose
+                command.Dispose();
+            connection.Close();
+            connection.Dispose();
         }
     }
 }
