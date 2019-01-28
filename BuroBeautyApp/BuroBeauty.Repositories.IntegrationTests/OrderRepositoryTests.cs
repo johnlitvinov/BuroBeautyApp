@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BuroBeauty.Repositories.IntegrationTests
 {
-    [TestClass]
+   
     public class OrderRepositoryTests
     {
         private IOrderRepository _orderRepository;
@@ -39,6 +39,8 @@ namespace BuroBeauty.Repositories.IntegrationTests
             Assert.IsNotNull(resultOrder);
             Assert.IsTrue(resultOrder.ServiceAmount==10);
         }
+
+        [TestMethod]
         public void DeleteTest()
         {
             _orderRepository.DeleteOrder(3);

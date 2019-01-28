@@ -121,7 +121,7 @@ namespace BuroBeauty.Repositories.Implementation
                                             order.MasterId,
                                             order.ServiceId,
                                             order.PurchaseDate.ToString("yyyy-MM-dd hh:mm:ss"),
-                                             order.ServiceAmount, 
+                                            order.ServiceAmount, 
                                             order.Id);
 
             //Create and open a connection to SQL Server 

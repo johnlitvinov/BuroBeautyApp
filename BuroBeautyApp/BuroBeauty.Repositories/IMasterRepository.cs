@@ -8,9 +8,10 @@ using BuroBeauty.DB.Entities;
 namespace BuroBeauty.Repositories
 {
     public interface IMasterRepository
-
     {
-        Master[] GetAllMasters();
-
+        Master GetMasterById(int? id);      
+        Master CreateMaster(Master master);
+        void UpdateMaster(Master master);
+        void DeleteMaster(int? id);
     }
 }
