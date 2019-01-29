@@ -9,9 +9,8 @@ namespace BuroBeauty.Repositories
 {
     public interface IOrderRepository
     {
-      
         Order GetOrderById(int? id);
-        List<Order> GetOrdersByDate(DateTime? date);
+        List<OrderListItem> GetOrdersByDate(DateTime? date);
         Order CreateOrder(Order order);
         void UpdateOrder(Order order);
         void DeleteOrder(int? id);

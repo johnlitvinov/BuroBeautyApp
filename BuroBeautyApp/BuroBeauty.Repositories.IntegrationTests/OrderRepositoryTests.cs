@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BuroBeauty.Repositories.IntegrationTests
 {
-   
+    [TestClass]
     public class OrderRepositoryTests
     {
         private IOrderRepository _orderRepository;
@@ -14,6 +14,14 @@ namespace BuroBeauty.Repositories.IntegrationTests
         public void SetUp()
         {
             _orderRepository = new OrderRepository();
+        }
+
+        [TestMethod]
+        public void GetOrdersByDateOrderTest()
+        {
+           
+            var resultOrder = _orderRepository.GetOrdersByDate(DateTime.Now) ;
+            Assert.IsNotNull(resultOrder);
         }
 
         [TestMethod]

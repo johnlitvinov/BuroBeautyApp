@@ -46,11 +46,13 @@ namespace BuroBeauty.Repositories.Implementation
             return result;
         }
 
-        public List<Order> GetOrdersByDate(DateTime? date)
+        public List<OrderListItem> GetOrdersByDate(DateTime? date)
         {
-            var result = new List<Order>();
+            var result = new List<OrderListItem>();
             //Create the SQL Query for returning an article category based on its primary key
-            string sqlQuery = "SELECT * from [dbo].[Order] ";
+            string sqlQuery = "SELECT * from [dbo].[Order] " +
+                              "LEFT JOIN [dbo].[Master] ON[dbo].[Order].[MasterId] = [Master].[Id]" +
+                              "INNER JOIN [dbo].[Service] ON[dbo].[Order].[ServiceId] = [Service].[Id]";
 
             if (date != null)
             {
@@ -70,12 +72,15 @@ namespace BuroBeauty.Repositories.Implementation
             {
                 while (dataReader.Read())
                 {
-                    var row = new Order();
-                    row.Id = Convert.ToInt32(dataReader["id"]);
-                    row.ServiceId = Convert.ToInt32(dataReader["ServiceId"]);
-                    row.MasterId = Convert.ToInt32(dataReader["MasterId"]);
+                    OrderListItem row = new OrderListItem();
+                    row.Id = Convert.ToInt32(dataReader["Id"]);
+                    row.ServiceName = dataReader["ServiceId"].ToString();
+                    row.MasterFullName = dataReader["MasterId"] is DBNull 
+                        ? null 
+                        : dataReader["MasterId"].ToString();
                     row.PurchaseDate = Convert.ToDateTime(dataReader["PurchaseDate"]);
                     row.ServiceAmount = Convert.ToDecimal(dataReader["ServiceAmount"]);
+                 
                     result.Add(row);
                 }
             }

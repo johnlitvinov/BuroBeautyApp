@@ -10,7 +10,7 @@ namespace BuroBeauty.DB.Entities
    public class Order
     {
         public int Id { get; set; }
-        public int MasterId { get; set; }
+        public int? MasterId { get; set; }
         public int ServiceId { get; set; }
         public decimal ServiceAmount { get; set; }
         public DateTime PurchaseDate { get; set; }

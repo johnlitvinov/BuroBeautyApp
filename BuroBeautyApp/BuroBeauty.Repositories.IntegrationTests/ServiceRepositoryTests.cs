@@ -24,7 +24,7 @@ namespace BuroBeauty.Repositories.IntegrationTests
         public void CreateServiceTest()
         {
             Service service = new Service();
-            service.Name = "Otbelivanie vaginu";
+            service.Name = "Otbelivanie ";
             var resultMaster = _serviceRepository.CreateService(service);
             Assert.IsNotNull(resultMaster);
             Assert.IsTrue(service.Id != 0);
@@ -34,7 +34,7 @@ namespace BuroBeauty.Repositories.IntegrationTests
         public void UpdateServiceTest()
         {
             Service service = _serviceRepository.GetServiceById(7);
-            service.Name = "PENETRACIA";
+            service.Name = "Microblading";
             _serviceRepository.UpdateService(service);
             var resultService = _serviceRepository.GetServiceById(7);
             Assert.IsNotNull(resultService);

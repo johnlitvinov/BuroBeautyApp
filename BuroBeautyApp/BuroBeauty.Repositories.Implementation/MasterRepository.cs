@@ -48,9 +48,14 @@ namespace BuroBeauty.Repositories.Implementation
 
         public Master CreateMaster(Master master)
         {
-            string sqlQuery = String.Format("Insert into [dbo].[Master] (Name,FullName,Phone,[Percent]) Values('{0}', '{1}', '{2}', {3} ); " +
+            string sqlQuery = String.Format("Insert into [dbo].[Master] " +
+                                            "(Name,FullName,Phone,[Percent]) " +
+                                            "Values('{0}', '{1}', '{2}', {3} ); " +
                                             "SELECT SCOPE_IDENTITY()",
-                master.Name, master.FullName, master.Phone, master.Percent);
+                                            master.Name, 
+                                            master.FullName, 
+                                            master.Phone, 
+                                            master.Percent);
 
             //Create and open a connection to SQL Server 
             SqlConnection connection = new SqlConnection(_connectionString);
@@ -81,11 +86,11 @@ namespace BuroBeauty.Repositories.Implementation
                                             "Phone = '{2}', " +
                                             "[Percent] = {3} " +
                                             "where ID = {4}",
-                master.Name,
-                master.FullName,
-                master.Phone,
-                master.Percent,
-                master.Id);
+                                             master.Name,
+                                             master.FullName,
+                                             master.Phone,
+                                             master.Percent,
+                                             master.Id);
 
             //Create and open a connection to SQL Server 
             SqlConnection connection = new SqlConnection(_connectionString);
@@ -105,7 +110,8 @@ namespace BuroBeauty.Repositories.Implementation
         public void DeleteMaster(int? id)
         {
             //Create the SQL Query for deleting an article
-            string sqlQuery = String.Format("DELETE from [dbo].[Master] where Id = {0}", id);
+            string sqlQuery = String.Format("DELETE from [dbo].[Master] " +
+                                            "where Id = {0}", id);
 
             //Create and open a connection to SQL Server 
             SqlConnection connection = new SqlConnection(_connectionString);
@@ -117,9 +123,8 @@ namespace BuroBeauty.Repositories.Implementation
             // Execute the command
             int rowsDeletedCount = command.ExecuteNonQuery();
             if (rowsDeletedCount != 0)
-                //    result = true;
-
-                // Close and dispose
+              
+             // Close and dispose
             command.Dispose();
             connection.Close();
             connection.Dispose();

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BuroBeauty.BLL;
 using BuroBeauty.Repositories;
+using BuroBeauty.BLL;
+using BuroBeauty.DB.Entities;
 
 namespace BuroBeauty.BLL.Implementation
 {
@@ -17,5 +18,24 @@ namespace BuroBeauty.BLL.Implementation
             _masterRepository = masterRepository;
         }
 
+        public Master CreateMaster(Master master)
+        {
+            return _masterRepository.CreateMaster(master);
+        }
+
+        public Master GetMasterrById(int? id)
+        {
+            return _masterRepository.GetMasterById(id);
+        }
+
+        public void UpdateMaster(Master master)
+        {
+            _masterRepository.UpdateMaster(master);
+        }
+
+        public void DeleteMaster(int? id)
+        {
+           _masterRepository.DeleteMaster(id);
+        }
     }
 }

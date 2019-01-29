@@ -51,6 +51,10 @@
       <Project>{8ce91038-321e-4cbb-b98b-282cffd77783}</Project>
       <Name>BuroBeauty.BLL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BuroBeauty.DB.Entities\BuroBeauty.DB.Entities.csproj">
+      <Project>{9aef2a9c-5dde-4690-b126-eab8befa506c}</Project>
+      <Name>BuroBeauty.DB.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BuroBeauty.Repositories\BuroBeauty.Repositories.csproj">
       <Project>{5ed4e374-53a5-4c52-b661-4b1d8fca452a}</Project>
       <Name>BuroBeauty.Repositories</Name>
