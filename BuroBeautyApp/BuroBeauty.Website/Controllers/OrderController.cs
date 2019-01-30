@@ -26,8 +26,10 @@ namespace MyTestProject.Controllers
         {
             IOrderRepository orderRepository = new OrderRepository();
             _orderManager = new OrderManager(orderRepository);
+
             IServiceRepository serviceRepository = new ServiceRepository();
             _serviceManager= new ServiceManager(serviceRepository);
+
             IMasterRepository masterRepository = new MasterRepository();
             _masterManager = new MasterManager(masterRepository);
         }
@@ -74,7 +76,10 @@ namespace MyTestProject.Controllers
             ViewBag.Services = _serviceManager.GetAllservices();
             ViewBag.Masters = _masterManager.GetAllMasters();
             
-            return View();
+            return View(new Order()
+            {
+                PurchaseDate = DateTime.Now
+            });
         }
 
         // POST: SoldServices/Create
@@ -87,12 +92,15 @@ namespace MyTestProject.Controllers
             if (ModelState.IsValid)
             {
                 
-
                 order.PurchaseDate = DateTime.Now;
                 _orderManager.CreateOrder(order);
 
                 return RedirectToAction("Index");
             }
+
+            ViewBag.Services = _serviceManager.GetAllservices();
+            ViewBag.Masters = _masterManager.GetAllMasters();
+
             return View(order);
         }
         
@@ -103,7 +111,7 @@ namespace MyTestProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var order = _orderManager.GetOrderDetailsById(id);
+            var order = _orderManager.GetOrderById(id);
             if (order == null)
             {
                 return HttpNotFound();

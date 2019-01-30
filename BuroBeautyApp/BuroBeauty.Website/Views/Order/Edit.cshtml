@@ -1,4 +1,5 @@
-﻿@model BuroBeauty.DB.Entities.OrderDetails
+﻿@model BuroBeauty.DB.Entities.Order
+@using BuroBeauty.DB.Entities
 
 @{
     ViewBag.Title = "Edit";
@@ -14,23 +15,53 @@
         <h4></h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
-
         <div class="form-group">
-            @Html.LabelFor(model => model.ServiceName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2" for="ServiceId">Услуга</label>
+
+            @*@Html.LabelFor(model => model.ServiceName, htmlAttributes: new { @class = "control-label col-md-2" })*@
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ServiceName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ServiceName, "", new { @class = "text-danger" })
+                <select name="ServiceId" class="form-control">
+                    @foreach (var service in (List<Service>)ViewBag.Services)
+                    {
+                        <option value="@service.Id">@service.Name</option>
+                    }
+                </select>
             </div>
         </div>
 
         <div class="form-group">
-                @Html.LabelFor(model => model.PurchaseDate, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.PurchaseDate, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.PurchaseDate, "", new { @class = "text-danger" })
-                </div>
+            @Html.LabelFor(model => model.PurchaseDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PurchaseDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PurchaseDate, "", new { @class = "text-danger" })
             </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="MasterId">Мастер</label>
+
+            @*@Html.LabelFor(model => model.ServiceName, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <div class="col-md-10">
+                <select name="MasterId" class="form-control">
+                    @foreach (var master in (List<Master>)ViewBag.Masters)
+                    {
+                        <option value="@master.Id" @(Model.MasterId == master.Id ? "selected='selected'" : "")>@master.Name</option>
+                    }
+                </select>
+
+            </div>
+        </div>
+
+
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.MasterFullName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MasterFullName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MasterFullName, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.ServiceAmount, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -42,12 +73,12 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Добавить новую услугу" class="btn btn-default" />
             </div>
         </div>
     </div>
-}
 
+}
 <div>
     @Html.ActionLink("Вернуться назад", "Index")
 </div>

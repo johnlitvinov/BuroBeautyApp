@@ -210,9 +210,9 @@ namespace BuroBeauty.Repositories.Implementation
             // Execute the command
             int rowsDeletedCount = command.ExecuteNonQuery();
             if (rowsDeletedCount != 0)
-                //    result = true;
+            // result = true;
 
-                // Close and dispose
+            // Close and dispose
                 command.Dispose();
             connection.Close();
             connection.Dispose();
