@@ -19,9 +19,17 @@ namespace BuroBeauty.Repositories.IntegrationTests
         [TestMethod]
         public void GetOrdersByDateOrderTest()
         {
-           
             var resultOrder = _orderRepository.GetOrdersByDate(DateTime.Now) ;
             Assert.IsNotNull(resultOrder);
+        }
+
+        [TestMethod]
+        public void GetOrderDetailsByIdTest()
+        {
+            int testId = 4;
+            var resultOrder = _orderRepository.GetOrderDetailsById(testId);
+            Assert.IsNotNull(resultOrder);
+            Assert.IsNotNull(resultOrder.ServiceName);
         }
 
         [TestMethod]

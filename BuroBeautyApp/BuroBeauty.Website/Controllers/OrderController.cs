@@ -46,7 +46,6 @@ namespace MyTestProject.Controllers
             }
 
             var items = _orderManager.GetOrdersByDate(date);
-
             ViewBag.Total = items.Sum(x => x.ServiceAmount);
             ViewBag.SelectedDate = date;
             return View(items);
@@ -55,7 +54,7 @@ namespace MyTestProject.Controllers
         // GET: SoldServices/Details/5
         public ActionResult Details(int id)
         {
-            Order order = _orderManager.GetOrderById(id);
+            var order = _orderManager.GetOrderDetailsById(id);
             if (order == null)
             {
                 return HttpNotFound();
@@ -78,6 +77,8 @@ namespace MyTestProject.Controllers
         {
             if (ModelState.IsValid)
             {
+                
+
                 order.PurchaseDate = DateTime.Now;
                 _orderManager.CreateOrder(order);
 
@@ -93,7 +94,7 @@ namespace MyTestProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Order order = _orderManager.GetOrderById(id);
+            var order = _orderManager.GetOrderDetailsById(id);
             if (order == null)
             {
                 return HttpNotFound();
@@ -110,7 +111,7 @@ namespace MyTestProject.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,MasterId,ServiceId,ServiceAmount,PurchaseDate")] Order order)
-        {
+        { 
             if (ModelState.IsValid)
             {
                 _orderManager.UpdateOrder(order);
@@ -128,7 +129,7 @@ namespace MyTestProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Order order = _orderManager.GetOrderById(id);
+            var order = _orderManager.GetOrderDetailsById(id);
             if (order == null)
             {
                 return HttpNotFound();

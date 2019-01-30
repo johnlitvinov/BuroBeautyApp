@@ -18,9 +18,9 @@ namespace BuroBeauty.BLL.Implementation
             _orderRepository = orderRepository;
         }
 
-        public Order CreateOrder(Order order)
+        public List<OrderListItem> GetOrdersByDate(DateTime? date)
         {
-            return _orderRepository.CreateOrder(order);
+            return _orderRepository.GetOrdersByDate(date);
         }
 
         public Order GetOrderById(int? id)
@@ -28,9 +28,14 @@ namespace BuroBeauty.BLL.Implementation
             return _orderRepository.GetOrderById(id);
         }
 
-        public List<OrderListItem> GetOrdersByDate(DateTime? date)
+        public OrderDetails GetOrderDetailsById(int? id)
         {
-            return _orderRepository.GetOrdersByDate(date);
+            return _orderRepository.GetOrderDetailsById(id);
+        }
+
+        public Order CreateOrder(Order order)
+        {
+            return _orderRepository.CreateOrder(order);
         }
 
         public void UpdateOrder(Order order)
@@ -41,5 +46,6 @@ namespace BuroBeauty.BLL.Implementation
         {
            _orderRepository.DeleteOrder(id);
         }
+
     }
 }

@@ -1,6 +1,5 @@
 ﻿@model List<BuroBeauty.DB.Entities.OrderListItem>
 
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -12,99 +11,105 @@
     ViewBag.Title = "Index";
 }
 
-<h3>Buro Beauty Saloon</h3>
 <h5>Nail,Brow,Eyelashes</h5>
+
 
 <!-- Datepicker -->
 @using (Html.BeginForm("Index", "Order", FormMethod.Post, new { @id = "date_form" }))
-{   
-    <input type="Date" id="datepicker" name="date" value="@ViewBag.SelectedDate.ToString("yyyy-MM-dd")"/>
-    }
+{
+    <input type="Date" id="datepicker" name="date" value="@ViewBag.SelectedDate.ToString("yyyy-MM-dd")" />
+}
 
-    <!--Search-->
+@*  <!--Search-->
     @using (Html.BeginForm("Index", "", FormMethod.Get))
     {
         <p style="top:17%; left:33%">
             Найти по названию процедуры: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
             <input type="submit" value="Поиск" />
         </p>
-    }
-       <p style="top:18%; left:73%">
-            @Html.ActionLink("Добавить Услугу", "Create")
-        </p>
+    }*@
+
+
+<p style="top:30%; left:73%">
+    @Html.ActionLink("Добавить Услугу", "Create")
+</p>
 
 <table class="table">
-        <style type="text/css">
-            TABLE {
-                width: 300px; /* Ширина таблицы */
-                border: 1px solid black; /* Рамка вокруг таблицы */
-                border-bottom: none; /* Убираем линию снизу */
-            }
-            TD, TH, TR {
-                padding: 3px; /* Поля вокруг содержимого ячеек */
-            }
-            TH {
-                text-align: left; /* Выравнивание по левому краю */
-                background: white; /* Цвет фона */
-                color: black; /* Цвет текста */
-                border-bottom: 1px solid black; /* Линия снизу */
-            }
-            TD {
-                border-bottom: 1px solid black; /* Линия снизу */
-            }
-        </style>
+    <style type="text/css">
+        TABLE {
+            width: 300px; /* Ширина таблицы */
+            border: 1px solid black; /* Рамка вокруг таблицы */
+            border-bottom: none; /* Убираем линию снизу */
+        }
 
+        TD, TH, TR {
+            padding: 3px; /* Поля вокруг содержимого ячеек */
+        }
+
+        TH {
+            text-align: left; /* Выравнивание по левому краю */
+            background: white; /* Цвет фона */
+            color: black; /* Цвет текста */
+            border-bottom: 1px solid black; /* Линия снизу */
+        }
+
+        TD {
+            border-bottom: 1px solid black; /* Линия снизу */
+        }
+    </style>
+
+    <tr>
+        <th>
+            Наименование Услуги
+            @* @Html.DisplayNameFor(model => model.)*@
+        </th>
+        <th>
+            Дата
+            @* @Html.ActionLink("Date", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })*@
+
+            @* @Html.DisplayNameFor(model => model.PurchaseDate)*@
+        </th>
+        <th>
+            Сумма
+            @* @Html.DisplayNameFor(model => model.ServiceName)*@
+        </th>
+        <th>
+            Мастер
+            @* @Html.DisplayNameFor(model => model.MasterFullName)*@
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
         <tr>
-            <th>
-                Наименование
-               @* @Html.DisplayNameFor(model => model.)*@
-            </th>
-            <th>
-                Дата
-                @* @Html.ActionLink("Date", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })*@
-
-                @* @Html.DisplayNameFor(model => model.PurchaseDate)*@
-            </th>
-            <th>
-                Сумма
-                @* @Html.DisplayNameFor(model => model.ServiceName)*@
-            </th>
-            <th>
-                Мастер
-                @* @Html.DisplayNameFor(model => model.MasterFullName)*@
-            </th>
-
-            <th></th>
-        </tr>
-
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ServiceName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PurchaseDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ServiceAmount)  р.
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MasterFullName)
-                    </td>
-                    <td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ServiceName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PurchaseDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ServiceAmount)  р.
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MasterFullName)
+            </td>
+            <td>
                 <u> @Html.ActionLink("Редактировать", "Edit", new { id = item.Id })</u>
                 <u> @Html.ActionLink("Детали", "Details", new { id = item.Id })</u>
-                <u> @Html.ActionLink("Удалить", "Delete", new { id = item.Id })</u></td>
-                </tr>
-            }
+                <u> @Html.ActionLink("Удалить", "Delete", new { id = item.Id })</u>
+            </td>
+        </tr>
+    }
 
-            <tr>
-                <td></td>
-                <td><b>Итого</b></td>
-                <td colspan="3"> @ViewBag.Total р. </td>
-            </tr>
-        </table>
+    <tr>
+        <td></td>
+        <td><b>Итого</b></td>
+        <td colspan="3"> @ViewBag.Total р. </td>
+    </tr>
+</table>
 
 
 

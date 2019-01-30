@@ -46,13 +46,64 @@ namespace BuroBeauty.Repositories.Implementation
             return result;
         }
 
+        public OrderDetails GetOrderDetailsById(int? id)
+        {
+            //Create the SQL Query for returning an article category based on its primary key
+            string sqlQuery = @"SELECT 
+                                  o.ID as OrderId,
+                                  s.Id as ServiceId,
+                                  m.Id as MasterId,
+                                  s.Name as ServiceName,
+                                  o.PurchaseDate,
+                                  o.ServiceAmount,
+                                  m.FullName as MasterFullName
+                                  FROM [dbo].[Order] as o
+                                  LEFT JOIN [dbo].[Master] as m ON o.[MasterId] = m.[Id]
+                                  INNER JOIN [dbo].[Service] as s ON  o.[ServiceId] = s.[Id]
+                                  where o.ID = " + id;
+
+            OrderDetails result = null;
+
+            //Create and open a connection to SQL Server 
+            SqlConnection connection = new SqlConnection(_connectionString);
+            connection.Open();
+
+            SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+            SqlDataReader dataReader = command.ExecuteReader();
+
+            //load into the result object the returned row from the database
+            if (dataReader.HasRows)
+            {
+                dataReader.Read();
+                result = new OrderDetails();
+                result.Id = Convert.ToInt32(dataReader["OrderId"]);
+                result.ServiceId = Convert.ToInt32(dataReader["ServiceId"]);
+                result.MasterId = Convert.ToInt32(dataReader["MasterId"]);
+                result.PurchaseDate = Convert.ToDateTime(dataReader["PurchaseDate"]);
+                result.ServiceAmount = Convert.ToDecimal(dataReader["ServiceAmount"]);
+                result.ServiceName = dataReader["ServiceName"].ToString();
+                result.MasterFullName = dataReader["MasterFullName"] is DBNull
+                    ? null
+                    : dataReader["MasterFullName"].ToString();
+            }
+            connection.Close();
+            return result;
+        }
+
         public List<OrderListItem> GetOrdersByDate(DateTime? date)
         {
             var result = new List<OrderListItem>();
             //Create the SQL Query for returning an article category based on its primary key
-            string sqlQuery = "SELECT * from [dbo].[Order] " +
-                              "LEFT JOIN [dbo].[Master] ON[dbo].[Order].[MasterId] = [Master].[Id]" +
-                              "INNER JOIN [dbo].[Service] ON[dbo].[Order].[ServiceId] = [Service].[Id]";
+            string sqlQuery = @"SELECT 
+                                  o.ID as OrderId,
+                                  s.Name as ServiceName,
+                                  o.PurchaseDate,
+                                  o.ServiceAmount,
+                                  m.FullName as MasterFullName
+                                  FROM [dbo].[Order] as o
+                                  LEFT JOIN [dbo].[Master] as m ON o.[MasterId] = m.[Id]
+                                  INNER JOIN [dbo].[Service] as s ON  o.[ServiceId] = s.[Id]";
 
             if (date != null)
             {
@@ -73,11 +124,11 @@ namespace BuroBeauty.Repositories.Implementation
                 while (dataReader.Read())
                 {
                     OrderListItem row = new OrderListItem();
-                    row.Id = Convert.ToInt32(dataReader["Id"]);
-                    row.ServiceName = dataReader["ServiceId"].ToString();
-                    row.MasterFullName = dataReader["MasterId"] is DBNull 
+                    row.Id = Convert.ToInt32(dataReader["OrderId"]);
+                    row.ServiceName = dataReader["ServiceName"].ToString();
+                    row.MasterFullName = dataReader["MasterFullName"] is DBNull 
                         ? null 
-                        : dataReader["MasterId"].ToString();
+                        : dataReader["MasterFullName"].ToString();
                     row.PurchaseDate = Convert.ToDateTime(dataReader["PurchaseDate"]);
                     row.ServiceAmount = Convert.ToDecimal(dataReader["ServiceAmount"]);
                  
@@ -119,9 +170,9 @@ namespace BuroBeauty.Repositories.Implementation
             //Create the SQL Query for deleting an article
             string sqlQuery = String.Format("Update [dbo].[Order] SET " +
                                             "MasterId = {0}, " +
-                                            "ServiceId = {1}," +
-                                            " PurchaseDate = '{2}', " +
-                                            " ServiceAmount = {3} " +
+                                            "ServiceId = {1}, " +
+                                            "PurchaseDate = '{2}', " +
+                                            "ServiceAmount = {3} " +
                                             "where ID = {4}",
                                             order.MasterId,
                                             order.ServiceId,
@@ -166,5 +217,7 @@ namespace BuroBeauty.Repositories.Implementation
             connection.Close();
             connection.Dispose();
         }
+
+        
     }
 }

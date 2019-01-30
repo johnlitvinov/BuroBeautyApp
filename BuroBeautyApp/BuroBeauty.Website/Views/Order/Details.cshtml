@@ -1,4 +1,4 @@
-﻿@model List<BuroBeauty.DB.Entities.OrderListItem>
+﻿@model BuroBeauty.DB.Entities.OrderDetails
 
 
 @{
@@ -11,26 +11,37 @@
     <h4></h4>
     <hr />
     <dl class="dl-horizontal">
+       
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            Наименование услуги
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.ServiceName)
+        </dd>
+        
+        <dt>
+            Фамилия Мастера
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MasterFullName)
         </dd>
 
-
         <dt>
-            @Html.DisplayNameFor(model => model.Amount)
+           Стоимость услуги
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.Amount)
+            @Html.DisplayFor(model => model.ServiceAmount)
         </dd>
 
+        <dt>
+            Дата
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PurchaseDate)
+        </dd>
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Изменить", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Вернуться назад", "Index")
 </p>

@@ -9,8 +9,9 @@ namespace BuroBeauty.BLL
 {
     public interface IOrderManager
     {
-        Order GetOrderById(int? id);
         List<OrderListItem> GetOrdersByDate(DateTime? date);
+        Order GetOrderById(int? id);
+        OrderDetails GetOrderDetailsById(int? id);
         Order CreateOrder(Order order);
         void UpdateOrder(Order order);
         void DeleteOrder(int? id);
