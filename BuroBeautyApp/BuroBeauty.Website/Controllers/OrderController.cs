@@ -19,11 +19,17 @@ namespace MyTestProject.Controllers
     public class OrderController : Controller
     {
         private IOrderManager _orderManager;
+        private IServiceManager _serviceManager;
+        private IMasterManager _masterManager;
 
         public OrderController()
         {
             IOrderRepository orderRepository = new OrderRepository();
             _orderManager = new OrderManager(orderRepository);
+            IServiceRepository serviceRepository = new ServiceRepository();
+            _serviceManager= new ServiceManager(serviceRepository);
+            IMasterRepository masterRepository = new MasterRepository();
+            _masterManager = new MasterManager(masterRepository);
         }
 
         // GET: SoldServices
@@ -65,6 +71,9 @@ namespace MyTestProject.Controllers
         // GET: SoldServices/Create
         public ActionResult Create()
         {
+            ViewBag.Services = _serviceManager.GetAllservices();
+            ViewBag.Masters = _masterManager.GetAllMasters();
+            
             return View();
         }
 

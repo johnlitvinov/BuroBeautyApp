@@ -16,6 +16,41 @@ namespace BuroBeauty.Repositories.Implementation
                                            "Initial Catalog = BuroBeautyApp; " +
                                            @"server=localhost\SQLEXPRESS";
 
+        public List<Master> GetAllMasters()
+        {
+            //Create the SQL Query for returning an article category based on its primary key
+            string sqlQuery = "SELECT * from [dbo].[Master]";
+
+            List<Master> result = new List<Master>();
+
+            //Create and open a connection to SQL Server 
+            SqlConnection connection = new SqlConnection(_connectionString);
+            connection.Open();
+
+            SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+            SqlDataReader dataReader = command.ExecuteReader();
+
+            //load into the result object the returned row from the database
+            if (dataReader.HasRows)
+            {
+                while (dataReader.Read())
+                {
+                    var row = new Master();
+                    row.Id = Convert.ToInt32(dataReader["Id"]);
+                    row.Name = Convert.ToString(dataReader["Name"]);
+                    row.FullName = Convert.ToString(dataReader["FullName"]);
+                    row.Phone = Convert.ToString(dataReader["Phone"]);
+                    row.Percent = Convert.ToDecimal(dataReader["Percent"]);
+
+                    result.Add(row);
+                };
+            }
+            connection.Close();
+            return result;
+        }
+    
+
         public Master GetMasterById(int? id)
         {
             //Create the SQL Query for returning an article category based on its primary key

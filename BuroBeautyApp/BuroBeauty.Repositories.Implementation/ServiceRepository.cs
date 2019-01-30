@@ -16,6 +16,37 @@ namespace BuroBeauty.Repositories.Implementation
                                            "Initial Catalog = BuroBeautyApp; " +
                                            @"server=localhost\SQLEXPRESS";
 
+
+        public List<Service> GetAllservices()
+        {
+            //Create the SQL Query for returning an article category based on its primary key
+            string sqlQuery = "SELECT * from [dbo].[Service]";
+
+            List<Service> result = new List<Service>();
+
+            //Create and open a connection to SQL Server 
+            SqlConnection connection = new SqlConnection(_connectionString);
+            connection.Open();
+
+            SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+            SqlDataReader dataReader = command.ExecuteReader();
+
+            //load into the result object the returned row from the database
+            if (dataReader.HasRows)
+            {
+                while(dataReader.Read())
+                {
+                    var row = new Service();
+                    row.Id = Convert.ToInt32(dataReader["Id"]);
+                    row.Name = Convert.ToString(dataReader["Name"]);
+                    result.Add(row);
+                };
+            }
+            connection.Close();
+            return result;
+        }
+
         public Service GetServiceById(int? id)
         {
             //Create the SQL Query for returning an article category based on its primary key
@@ -115,5 +146,6 @@ namespace BuroBeauty.Repositories.Implementation
             connection.Close();
             connection.Dispose();
         }
+
     }
 }

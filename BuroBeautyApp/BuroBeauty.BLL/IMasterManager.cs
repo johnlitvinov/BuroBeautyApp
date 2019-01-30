@@ -9,6 +9,7 @@ namespace BuroBeauty.BLL
 {
     public interface IMasterManager
     {
+        List<Master> GetAllMasters();
         Master GetMasterrById(int? id);
         Master CreateMaster(Master master);
         void UpdateMaster(Master master);

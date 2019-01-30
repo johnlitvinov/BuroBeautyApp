@@ -9,6 +9,7 @@ namespace BuroBeauty.Repositories
 {
     public interface IServiceRepository
     {
+        List<Service> GetAllservices();
         Service GetServiceById(int? id);
         Service CreateService(Service service);
         void UpdateService(Service service);

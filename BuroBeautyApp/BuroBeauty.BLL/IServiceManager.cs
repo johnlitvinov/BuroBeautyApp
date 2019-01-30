@@ -9,6 +9,7 @@ namespace BuroBeauty.BLL
 {
     public interface IServiceManager
     {
+        List<Service> GetAllservices();
         Service GetServiceById(int? id);
         Service CreateServicer(Service service);
         void UpdateService(Service service);

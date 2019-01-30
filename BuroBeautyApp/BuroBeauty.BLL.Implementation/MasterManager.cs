@@ -18,6 +18,11 @@ namespace BuroBeauty.BLL.Implementation
             _masterRepository = masterRepository;
         }
 
+        public List<Master> GetAllMasters()
+        {
+            return _masterRepository.GetAllMasters();
+        }
+
         public Master CreateMaster(Master master)
         {
             return _masterRepository.CreateMaster(master);

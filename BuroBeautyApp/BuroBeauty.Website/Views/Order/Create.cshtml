@@ -1,4 +1,5 @@
-﻿@model BuroBeauty.DB.Entities.OrderDetails
+﻿@using BuroBeauty.DB.Entities
+@model BuroBeauty.DB.Entities.Order
 
 @{
     ViewBag.Title = "";
@@ -15,10 +16,16 @@
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
-        @Html.LabelFor(model => model.ServiceName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <label class="control-label col-md-2" for="ServiceId">Услуга</label>
+       
+        @*@Html.LabelFor(model => model.ServiceName, htmlAttributes: new { @class = "control-label col-md-2" })*@
         <div class="col-md-10">
-            @Html.EditorFor(model => model.ServiceName, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.ServiceName, "", new { @class = "text-danger" })
+            <select name="ServiceId" class="form-control">
+                @foreach (var service in (List<Service>)ViewBag.Services)
+                {
+                    <option value="@service.Id">@service.Name</option>
+                }
+            </select>
         </div>
     </div>
 
@@ -29,14 +36,47 @@
             @Html.ValidationMessageFor(model => model.PurchaseDate, "", new { @class = "text-danger" })
         </div>
     </div>
-
+    
+    
     <div class="form-group">
+        <label class="control-label col-md-2" for="MasterId">Мастер</label>
+
+        @*@Html.LabelFor(model => model.ServiceName, htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <div class="col-md-10">
+            <select name="MasterId" class="form-control">
+                @foreach (var master in (List<Master>)ViewBag.Masters)
+                {
+                    <option value="@master.Id">@master.Name</option>
+                }
+            </select>
+
+        </div>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    @*<div class="form-group">
         @Html.LabelFor(model => model.MasterFullName, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.MasterFullName, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.MasterFullName, "", new { @class = "text-danger" })
         </div>
-    </div>
+    </div>*@
 
     <div class="form-group">
         @Html.LabelFor(model => model.ServiceAmount, htmlAttributes: new { @class = "control-label col-md-2" })

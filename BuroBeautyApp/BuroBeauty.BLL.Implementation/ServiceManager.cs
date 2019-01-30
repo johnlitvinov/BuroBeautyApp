@@ -18,14 +18,19 @@ namespace BuroBeauty.BLL.Implementation
             _serviceRepository = serviceRepository;
         }
 
-        public Service CreateServicer(Service service)
+        public List<Service> GetAllservices()
         {
-            return _serviceRepository.CreateService(service);
+            return _serviceRepository.GetAllservices();
         }
 
         public Service GetServiceById(int? id)
         {
             return _serviceRepository.GetServiceById(id);
+        }
+
+        public Service CreateServicer(Service service)
+        {
+            return _serviceRepository.CreateService(service);
         }
 
         public void UpdateService(Service service)
