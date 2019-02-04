@@ -116,6 +116,9 @@ namespace MyTestProject.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Services = _serviceManager.GetAllservices();
+            ViewBag.Masters = _masterManager.GetAllMasters();
+
             return View(order);
         }
 
@@ -132,9 +135,12 @@ namespace MyTestProject.Controllers
             if (ModelState.IsValid)
             {
                 _orderManager.UpdateOrder(order);
-                // db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
+            ViewBag.Services = _serviceManager.GetAllservices();
+            ViewBag.Masters = _masterManager.GetAllMasters();
+
             return View(order);
         }  
 

@@ -7,6 +7,7 @@ using BuroBeauty.BLL;
 using BuroBeauty.BLL.Implementation;
 using BuroBeauty.Repositories;
 using BuroBeauty.Repositories.Implementation;
+using MyTestProject.Controllers;
 
 namespace BuroBeauty.Website.Controllers
 {
@@ -28,14 +29,14 @@ namespace BuroBeauty.Website.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+             // ViewBag.Message = "Your application description page.";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            //ViewBag.Message = "Your contact page.";
 
             return View();
         }

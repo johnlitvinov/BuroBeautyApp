@@ -6,24 +6,23 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
+    @RenderSection("head_scripts")
 </head>
 <body>
 <div class="navbar navbar-inverse navbar-fixed-top" >
     <div class="container">
         <div class="navbar-header">
+            <img src="/Images/IMG_1824.jpg" width="60" height="40"/>
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-
-           
-            <img src="/Images/PHOTO-2019-01-30-15-11-49.jpg" width="100" height="60"/>
+            @* <img src="/Images/PHOTO-2019-01-30-15-11-49.jpg" width="100" height="60"/>*@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Главная", "Index", "Home")</li>
+                <li>@Html.ActionLink("Главная", "Index", "Order")</li>
                 <li>@Html.ActionLink("О Нас", "About", "Home")</li>
                 <li>@Html.ActionLink("Контакты", "Contact", "Home")</li>
             </ul>
@@ -36,6 +35,7 @@
     <hr/>
     <footer>
         <p>&copy; @DateTime.Now.Year - ИП Ивановская Д.Д.</p>
+        <img src="/Images/IMG_1713.jpg" width="300" height="200" />
     </footer>
 </div>
 

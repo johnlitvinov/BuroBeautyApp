@@ -1,25 +1,15 @@
 ﻿@model List<BuroBeauty.DB.Entities.OrderListItem>
-
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-</head>
-</html>
-
 @{
     ViewBag.Title = "Index";
 }
 
 <h5>Nail,Brow,Eyelashes</h5>
 
-
 <!-- Datepicker -->
-@using (Html.BeginForm("Index", "Order", FormMethod.Post, new { @id = "date_form" }))
-{
-    <input type="Date" id="datepicker" name="date" value="@ViewBag.SelectedDate.ToString("yyyy-MM-dd")" />
-}
-
+    @using (Html.BeginForm("Index", "Order", FormMethod.Post, new { @id = "date_form" }))
+    {
+        <input type="Date" id="datepicker" name="date" value="@ViewBag.SelectedDate.ToString("yyyy-MM-dd")" />
+    }
 @*  <!--Search-->
     @using (Html.BeginForm("Index", "", FormMethod.Get))
     {
@@ -30,6 +20,12 @@
     }*@
 
 
+
+@using (Html.BeginForm("Index", "Order", FormMethod.Post, new {@id = "date_form"}))
+{
+    <p>Дата: <input type="text" id="datepicker" name="date" value="@ViewBag.SelectedDate.ToString("MM/dd/yyyy")"></p>
+                                                                                                
+}
 <p style="top:30%; left:73%">
     @Html.ActionLink("Добавить новую услугу", "Create")
 </p>
@@ -60,25 +56,20 @@
 
     <tr>
         <th>
-            Наименование Услуги
-            @* @Html.DisplayNameFor(model => model.)*@
+            Наименование Услуги:
         </th>
         <th>
-            Дата
-            @* @Html.ActionLink("Date", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })*@
-
-            @* @Html.DisplayNameFor(model => model.PurchaseDate)*@
+            Дата:
         </th>
         <th>
-            Сумма
-            @* @Html.DisplayNameFor(model => model.ServiceName)*@
+            Сумма:
         </th>
         <th>
-            Мастер
-            @* @Html.DisplayNameFor(model => model.MasterFullName)*@
+            Мастер:
         </th>
-
-        <th></th>
+        <th>
+            Дополнительные функционал:
+        </th>
     </tr>
 
     @foreach (var item in Model)
@@ -89,6 +80,7 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PurchaseDate)
+
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ServiceAmount)  р.
@@ -111,7 +103,14 @@
     </tr>
 </table>
 
-
-
-
-
+@section head_scripts{
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    @*<link rel="stylesheet" href="/resources/demos/style.css">*@
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#datepicker").datepicker();
+        });
+    </script>
+}
