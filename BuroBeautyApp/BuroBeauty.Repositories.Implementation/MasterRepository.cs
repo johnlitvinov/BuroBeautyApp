@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,10 +12,16 @@ namespace BuroBeauty.Repositories.Implementation
 {
     public class MasterRepository : IMasterRepository
     {
-        private string _connectionString = "Persist Security Info=False;" +
-                                           "Integrated Security = true; " +
-                                           "Initial Catalog = BuroBeautyApp; " +
-                                           @"server=localhost\SQLEXPRESS";
+        private string _connectionString;
+        //private string _connectionString = "Persist Security Info=False;" +
+        //                                   "Integrated Security = true; " +
+        //                                   "Initial Catalog = BuroBeautyApp; " +
+        //                                   @"server=localhost\SQLEXPRESS";
+
+        public MasterRepository()
+        {
+            _connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+        }
 
         public List<Master> GetAllMasters()
         {

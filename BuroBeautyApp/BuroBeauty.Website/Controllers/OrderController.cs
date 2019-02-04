@@ -16,6 +16,7 @@ using Microsoft.Ajax.Utilities;
 
 namespace MyTestProject.Controllers
 {
+    [Authorize]
     public class OrderController : Controller
     {
         private IOrderManager _orderManager;

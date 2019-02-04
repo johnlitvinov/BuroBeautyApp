@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -11,11 +12,17 @@ namespace BuroBeauty.Repositories.Implementation
 {
     public class OrderRepository : IOrderRepository
     {
-        private string _connectionString = "Persist Security Info=False;" +
-                                           "Integrated Security = true; " +
-                                           "Initial Catalog = BuroBeautyApp; " +
-                                           @"server=localhost\SQLEXPRESS";
-        
+        //private string _connectionString = "Persist Security Info=False;" +
+        //                                   "Integrated Security = true; " +
+        //                                   "Initial Catalog = BuroBeautyApp; " +
+        //                                   @"server=localhost\SQLEXPRESS";
+        private string _connectionString;
+
+        public OrderRepository()
+        {
+            _connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+        }
+
         public Order GetOrderById(int? id)
         {
             //Create the SQL Query for returning an article category based on its primary key

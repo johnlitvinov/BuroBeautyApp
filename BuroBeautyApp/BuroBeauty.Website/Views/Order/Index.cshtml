@@ -5,27 +5,16 @@
 
 <h5>Nail,Brow,Eyelashes</h5>
 
-<!-- Datepicker -->
-    @using (Html.BeginForm("Index", "Order", FormMethod.Post, new { @id = "date_form" }))
-    {
-        <input type="Date" id="datepicker" name="date" value="@ViewBag.SelectedDate.ToString("yyyy-MM-dd")" />
-    }
-@*  <!--Search-->
-    @using (Html.BeginForm("Index", "", FormMethod.Get))
-    {
-        <p style="top:17%; left:33%">
-            Найти по названию процедуры: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-            <input type="submit" value="Поиск" />
-        </p>
-    }*@
 
 
-
-@using (Html.BeginForm("Index", "Order", FormMethod.Post, new {@id = "date_form"}))
+@using (Html.BeginForm("Index", "Order", FormMethod.Post, new { @id = "date_form" }))
 {
-    <p>Дата: <input type="text" id="datepicker" name="date" value="@ViewBag.SelectedDate.ToString("MM/dd/yyyy")"></p>
-                                                                                                
+    <input type="text" id="datepicker" name="date" value="@ViewBag.SelectedDate.ToString("MM/dd/yyyy")" />
 }
+
+
+
+
 <p style="top:30%; left:73%">
     @Html.ActionLink("Добавить новую услугу", "Create")
 </p>
@@ -105,12 +94,19 @@
 
 @section head_scripts{
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    @*<link rel="stylesheet" href="/resources/demos/style.css">*@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
-        $(function () {
-            $("#datepicker").datepicker();
-        });
+        $( function() {
+            $( "#datepicker" ).datepicker();
+        } );
+    </script>
+   
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#datepicker").change(function () {
+                $("#date_form").submit();
+            })
+        })
     </script>
 }

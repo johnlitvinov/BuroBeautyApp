@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -11,11 +12,16 @@ namespace BuroBeauty.Repositories.Implementation
 {
     public class ServiceRepository : IServiceRepository
     {
-        private string _connectionString = "Persist Security Info=False;" +
-                                           "Integrated Security = true; " +
-                                           "Initial Catalog = BuroBeautyApp; " +
-                                           @"server=localhost\SQLEXPRESS";
+        //private string _connectionString = "Persist Security Info=False;" +
+        //                                   "Integrated Security = true; " +
+        //                                   "Initial Catalog = BuroBeautyApp; " +
+        //                                   @"server=localhost\SQLEXPRESS";
+        private string _connectionString;
 
+        public ServiceRepository()
+        {
+            _connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+        }
 
         public List<Service> GetAllservices()
         {
