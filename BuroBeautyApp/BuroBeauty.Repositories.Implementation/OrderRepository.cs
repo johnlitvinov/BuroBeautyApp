@@ -43,7 +43,7 @@ namespace BuroBeauty.Repositories.Implementation
                 result = new Order();
                 result.Id = Convert.ToInt32(dataReader["id"]);
                 result.ServiceId = Convert.ToInt32(dataReader["ServiceId"]);
-                result.MasterId = Convert.ToInt32(dataReader["MasterId"]);
+                result.MasterId = dataReader["MasterId"] is DBNull ? null : (int?)Convert.ToInt32(dataReader["MasterId"]);
                 result.PurchaseDate = Convert.ToDateTime(dataReader["PurchaseDate"]);
                 result.ServiceAmount = Convert.ToDecimal(dataReader["ServiceAmount"]);
             }
@@ -146,9 +146,12 @@ namespace BuroBeauty.Repositories.Implementation
 
         public Order CreateOrder(Order order)
         {
-            string sqlQuery = String.Format("Insert into [dbo].[Order] (ServiceId,MasterId,PurchaseDate,ServiceAmount) Values('{0}', '{1}', '{2}', {3} ); " +
+            string sqlQuery = String.Format("Insert into [dbo].[Order] (ServiceId,MasterId,PurchaseDate,ServiceAmount) Values({0}, {1}, '{2}', {3} ); " +
                                             "SELECT SCOPE_IDENTITY()",
-                order.ServiceId, order.MasterId, order.PurchaseDate.ToString("yyyy-MM-dd hh:mm:ss"), order.ServiceAmount);
+                order.ServiceId,
+                order.MasterId == null ? "NULL" : order.MasterId.ToString(),
+                order.PurchaseDate.ToString("yyyy-MM-dd hh:mm:ss"),
+                order.ServiceAmount);
 
             //Create and open a connection to SQL Server 
             SqlConnection connection = new SqlConnection(_connectionString);
@@ -179,7 +182,7 @@ namespace BuroBeauty.Repositories.Implementation
                                             "PurchaseDate = '{2}', " +
                                             "ServiceAmount = {3} " +
                                             "where ID = {4}",
-                                            order.MasterId,
+                                            order.MasterId == null ? "NULL" : order.MasterId.ToString(),
                                             order.ServiceId,
                                             order.PurchaseDate.ToString("yyyy-MM-dd hh:mm:ss"),
                                             order.ServiceAmount, 

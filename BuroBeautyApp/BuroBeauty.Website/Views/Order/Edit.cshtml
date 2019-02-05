@@ -32,6 +32,7 @@
         <label class="control-label col-md-2" for="MasterId">Мастер</label>
         <div class="col-md-10">
             <select name="MasterId" class="form-control">
+                <option value="" @(Model.MasterId == null ? "selected='selected'" : "")>-</option>
                 @foreach (var master in (List<Master>)ViewBag.Masters)
                 {
                     <option value="@master.Id" @(Model.MasterId == master.Id ? "selected='selected'" : "")>@master.Name</option>

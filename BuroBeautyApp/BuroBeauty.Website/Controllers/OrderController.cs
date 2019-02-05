@@ -39,24 +39,28 @@ namespace MyTestProject.Controllers
         // GET: SoldServices
         public ActionResult Index()
         {
-        // Подсчет суммы 
-            var items = _orderManager.GetOrdersByDate(null);
+            // Подсчет суммы 
+            var selectedDate = DateTime.Now;
+            var items = _orderManager.GetOrdersByDate(selectedDate);
             ViewBag.Total = items.Sum(x => x.ServiceAmount);
-            ViewBag.SelectedDate = DateTime.Now;
-            
+            ViewBag.SelectedDate = selectedDate;
+
+
          return View(items );
         }
 
         [HttpPost]
         public ActionResult Index(DateTime? date)
         {
+          
             if (date == null)
             {
                 return Index();
             }
-
+            
             var items = _orderManager.GetOrdersByDate(date);
             ViewBag.Total = items.Sum(x => x.ServiceAmount);
+            date = DateTime.Now;
             ViewBag.SelectedDate = date;
             return View(items);
         }
