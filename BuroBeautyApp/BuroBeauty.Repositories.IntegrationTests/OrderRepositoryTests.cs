@@ -13,7 +13,8 @@ namespace BuroBeauty.Repositories.IntegrationTests
         [TestInitialize]
         public void SetUp()
         {
-            _orderRepository = new OrderRepository();
+            IRepositorySettingsProvider settingsProvider = new RepositorySettingsProvider();
+            _orderRepository = new OrderRepository(settingsProvider);
         }
 
         [TestMethod]

@@ -204,7 +204,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="jquery-1.11.3.js" />
+    <Content Include="Images\IMG_1713.jpg" />
+    <Content Include="Images\IMG_1824.jpg" />
+    <Content Include="Images\PHOTO-2019-01-30-15-11-49.jpg" />
+    <Content Include="Images\WhatsApp Image 2018-01-14 at 20.56.44.jpeg" />
     <Content Include="jquery-1.12.4.js" />
     <Content Include="jquery-wp-content\themes\jqueryui.com\style.css" />
     <Content Include="jquery-wp-content\themes\js\main.js" />
@@ -271,7 +274,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Images\" />
     <Folder Include="jquery-wp-content\themes\jquery\content\books\" />
   </ItemGroup>
   <ItemGroup>

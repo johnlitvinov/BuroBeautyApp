@@ -45,6 +45,7 @@
     <Compile Include="MasterRepository.cs" />
     <Compile Include="OrderRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepositorySettingsProvider.cs" />
     <Compile Include="ServiceRepository.cs" />
   </ItemGroup>
   <ItemGroup>

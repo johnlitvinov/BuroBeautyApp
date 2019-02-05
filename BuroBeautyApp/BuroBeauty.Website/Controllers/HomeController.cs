@@ -17,7 +17,8 @@ namespace BuroBeauty.Website.Controllers
 
         public HomeController()
         {
-            IMasterRepository masterRepository = new MasterRepository();
+            IRepositorySettingsProvider settingsProvider = new RepositorySettingsProvider();
+            IMasterRepository masterRepository = new MasterRepository(settingsProvider);
             _masterManager = new MasterManager(masterRepository);
         }
 

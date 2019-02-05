@@ -7,9 +7,11 @@
 
 
 
-@using (Html.BeginForm("Index", "Order", FormMethod.Post, new { @id = "date_form" }))
+@using (Html.BeginForm("Index", "Order", FormMethod.Post, new
 {
-    <input type="text" id="datepicker" name="date" value="@ViewBag.SelectedDate.ToString("MM/dd/yyyy")" />
+    @id = "date_form", autocomplete = "off"}))
+{
+    <input type="text" autocomplete="false" id="datepicker" name="date" readonly="readonly" value="@ViewBag.SelectedDate.ToString("MM/dd/yyyy")" />
 }
 
 

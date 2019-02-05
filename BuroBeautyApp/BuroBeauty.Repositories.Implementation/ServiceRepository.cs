@@ -12,15 +12,13 @@ namespace BuroBeauty.Repositories.Implementation
 {
     public class ServiceRepository : IServiceRepository
     {
-        //private string _connectionString = "Persist Security Info=False;" +
-        //                                   "Integrated Security = true; " +
-        //                                   "Initial Catalog = BuroBeautyApp; " +
-        //                                   @"server=localhost\SQLEXPRESS";
-        private string _connectionString;
+        private readonly IRepositorySettingsProvider _repositorySettingsProvider;
+        private readonly string _connectionString;
 
-        public ServiceRepository()
+        public ServiceRepository(IRepositorySettingsProvider repositorySettingsProvider)
         {
-            _connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            _repositorySettingsProvider = repositorySettingsProvider;
+            _connectionString = _repositorySettingsProvider.GetSetting("DefaultConnection");
         }
 
         public List<Service> GetAllservices()

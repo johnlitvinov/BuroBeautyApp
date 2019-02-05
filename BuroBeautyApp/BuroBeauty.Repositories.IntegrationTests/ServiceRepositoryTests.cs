@@ -17,7 +17,8 @@ namespace BuroBeauty.Repositories.IntegrationTests
         [TestInitialize]
         public void SetUp()
         {
-            _serviceRepository = new ServiceRepository();
+            IRepositorySettingsProvider settingsProvider = new RepositorySettingsProvider();
+            _serviceRepository = new ServiceRepository(settingsProvider);
         }
 
         [TestMethod]

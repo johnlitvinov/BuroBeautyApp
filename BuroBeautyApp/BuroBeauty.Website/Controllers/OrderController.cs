@@ -25,13 +25,14 @@ namespace MyTestProject.Controllers
 
         public OrderController()
         {
-            IOrderRepository orderRepository = new OrderRepository();
+            IRepositorySettingsProvider settingsProvider = new RepositorySettingsProvider();
+            IOrderRepository orderRepository = new OrderRepository(settingsProvider);
             _orderManager = new OrderManager(orderRepository);
 
-            IServiceRepository serviceRepository = new ServiceRepository();
+            IServiceRepository serviceRepository = new ServiceRepository(settingsProvider);
             _serviceManager= new ServiceManager(serviceRepository);
 
-            IMasterRepository masterRepository = new MasterRepository();
+            IMasterRepository masterRepository = new MasterRepository(settingsProvider);
             _masterManager = new MasterManager(masterRepository);
         }
 
