@@ -70,8 +70,12 @@
                 @Html.DisplayFor(modelItem => item.ServiceName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PurchaseDate)
-
+                
+                @{
+                    string parameterValue = item.PurchaseDate.ToString("yyyy-MM-dd"); 
+                }
+                @Html.DisplayFor(modelItem=>parameterValue)
+                
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ServiceAmount)  р.

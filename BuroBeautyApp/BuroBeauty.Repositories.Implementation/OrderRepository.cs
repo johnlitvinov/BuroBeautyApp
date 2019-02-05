@@ -150,7 +150,7 @@ namespace BuroBeauty.Repositories.Implementation
                                             "SELECT SCOPE_IDENTITY()",
                 order.ServiceId,
                 order.MasterId == null ? "NULL" : order.MasterId.ToString(),
-                order.PurchaseDate.ToString("yyyy-MM-dd hh:mm:ss"),
+                order.PurchaseDate.ToString("yyyy-MM-dd"),
                 order.ServiceAmount);
 
             //Create and open a connection to SQL Server 
@@ -184,7 +184,7 @@ namespace BuroBeauty.Repositories.Implementation
                                             "where ID = {4}",
                                             order.MasterId == null ? "NULL" : order.MasterId.ToString(),
                                             order.ServiceId,
-                                            order.PurchaseDate.ToString("yyyy-MM-dd hh:mm:ss"),
+                                            order.PurchaseDate.ToString("yyyy-MM-dd"),
                                             order.ServiceAmount, 
                                             order.Id);
 
