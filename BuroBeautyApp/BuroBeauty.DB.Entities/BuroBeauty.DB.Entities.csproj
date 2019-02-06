@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dto\Master\MasterDayIncomeSummaryDto.cs" />
     <Compile Include="Master.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="OrderDetails.cs" />

@@ -1,3 +1,109 @@
-﻿
-<h2>CalculationOfMaster</h2>
+﻿@model List<BuroBeauty.DB.Entities.OrderListItem>
 
+<h2>Расчёт мастеров за день</h2>
+
+@using (Html.BeginForm("Index", "CalculationOfMastersController", FormMethod.Post, new
+{
+    @id = "date_form",
+    autocomplete = "off"
+}))
+{
+    <input type="text" autocomplete="false" id="datepicker" name="date" readonly="readonly" value="@ViewBag.SelectedDate.ToString("MM/dd/yyyy")" />
+}
+
+
+
+<table class="table">
+    <style type="text/css">
+        TABLE {
+            width: 200px; /* Ширина таблицы */
+            border: 1px solid black; /* Рамка вокруг таблицы */
+            border-bottom: none; /* Убираем линию снизу */
+        }
+
+        TD, TH, TR {
+            padding: 3px; /* Поля вокруг содержимого ячеек */
+        }
+
+        TH {
+            text-align: left; /* Выравнивание по левому краю */
+            background: white; /* Цвет фона */
+            color: black; /* Цвет текста */
+            border-bottom: 1px solid black; /* Линия снизу */
+        }
+
+        TD {
+            border-bottom: 1px solid black; /* Линия снизу */
+        }
+    </style>
+    <tr>
+        <th>
+            Мастер:
+        </th>
+        <th>
+            Дата:
+        </th>
+        <th>
+            Общая сумма за день:
+        </th>
+        <th>
+            Процент Мастера:
+        </th>
+        <th>
+            Заработок Мастера за день:
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+           <td>
+        @Html.DisplayFor(modelItem => item.MasterFullName)
+           </td>
+            <td>
+                @{
+                    string parameterValue = item.PurchaseDate.ToString("MM/dd/yyyy");
+                }
+                @Html.DisplayFor(modelItem => parameterValue)
+            </td>
+
+         <td>
+                р.
+         </td>
+            
+        <td>
+         %
+        </td>
+            
+        <td>
+        р.
+        </td>
+
+        </tr>
+    }
+        <tr>
+
+            <td></td>
+            <td><b>Итого за день: </b></td>
+            <td> @ViewBag.Total р.</td>
+            <td></td>
+            <td> р. </td>
+        </tr>
+    </table>
+
+    @section head_scripts{
+
+        <script>
+            $(function () {
+                $("#datepicker").datepicker();
+            });
+        </script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#datepicker").change(function () {
+                    $("#date_form").submit();
+                })
+            })
+        </script>
+    }
