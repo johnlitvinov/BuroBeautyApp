@@ -62,7 +62,7 @@ namespace BuroBeauty.Website.Controllers
             ViewBag.Total = items.Sum(x => x.TotalAmount);
             ViewBag.MastersTotal = items.Sum(x => x.AmountIncome);
             ViewBag.BuroTotal = ViewBag.Total - ViewBag.MastersTotal;
-            date = DateTime.Now;
+            
             ViewBag.SelectedDate = date;
             return View(items);
         }
