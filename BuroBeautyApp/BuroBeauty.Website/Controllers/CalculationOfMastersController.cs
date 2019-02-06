@@ -16,10 +16,10 @@ namespace BuroBeauty.Website.Controllers
 {
     public class CalculationOfMastersController : Controller
     {
-
         private IOrderManager _orderManager;
         private IServiceManager _serviceManager;
         private IMasterManager _masterManager;
+        private IMasterIncomeManager _masterIncomeManager;
 
         public CalculationOfMastersController()
         {
@@ -32,6 +32,8 @@ namespace BuroBeauty.Website.Controllers
 
             IMasterRepository masterRepository = new MasterRepository(settingsProvider);
             _masterManager = new MasterManager(masterRepository);
+
+            _masterIncomeManager = new MasterIncomeManager(_orderManager, _masterManager);
         }
 
         // GET: CalculationOfMasters
@@ -40,8 +42,10 @@ namespace BuroBeauty.Website.Controllers
             // Подсчет суммы на опр.дату
             var selectedDate = DateTime.Now;
 
-            var items = _orderManager.GetOrdersByDate(selectedDate);
-            ViewBag.Total = items.Sum(x => x.ServiceAmount);
+            var items = _masterIncomeManager.GetAllMastersIncomeByDate(selectedDate);
+            ViewBag.Total = items.Sum(x => x.TotalAmount);
+            ViewBag.MastersTotal = items.Sum(x => x.AmountIncome);
+            ViewBag.BuroTotal = ViewBag.Total - ViewBag.MastersTotal;
             ViewBag.SelectedDate = selectedDate;
             return View(items);
         }
@@ -54,8 +58,10 @@ namespace BuroBeauty.Website.Controllers
                 return Index();
             }
 
-            var items = _orderManager.GetOrdersByDate(date);
-            ViewBag.Total = items.Sum(x => x.ServiceAmount);
+            var items = _masterIncomeManager.GetAllMastersIncomeByDate(date);
+            ViewBag.Total = items.Sum(x => x.TotalAmount);
+            ViewBag.MastersTotal = items.Sum(x => x.AmountIncome);
+            ViewBag.BuroTotal = ViewBag.Total - ViewBag.MastersTotal;
             date = DateTime.Now;
             ViewBag.SelectedDate = date;
             return View(items);

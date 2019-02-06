@@ -105,14 +105,17 @@ namespace BuroBeauty.Repositories.Implementation
                                   s.Name as ServiceName,
                                   o.PurchaseDate,
                                   o.ServiceAmount,
-                                  m.FullName as MasterFullName
+                                  m.FullName as MasterFullName,
+                                  m.Id as MasterId
                                   FROM [dbo].[Order] as o
                                   LEFT JOIN [dbo].[Master] as m ON o.[MasterId] = m.[Id]
                                   INNER JOIN [dbo].[Service] as s ON  o.[ServiceId] = s.[Id]";
 
             if (date != null)
             {
-                sqlQuery += string.Format(" where PurchaseDate between '{0}' AND '{1}'", date.Value.ToString("MM/dd/yyyy"), date.Value.AddDays(1).ToString("MM/dd/yyyy"));
+                var startDateStr = date.Value.ToString("MM/dd/yyyy") + " 00:00:00";
+                var endDateStr = date.Value.ToString("MM/dd/yyyy") + " 23:59:59";
+                sqlQuery += string.Format(" where PurchaseDate between '{0}' AND '{1}'", startDateStr, endDateStr);
             }
 
             //Create and open a connection to SQL Server 
@@ -134,6 +137,9 @@ namespace BuroBeauty.Repositories.Implementation
                     row.MasterFullName = dataReader["MasterFullName"] is DBNull 
                         ? null 
                         : dataReader["MasterFullName"].ToString();
+                    row.MasterId = dataReader["MasterId"] is DBNull
+                        ? (int?) null
+                        : Convert.ToInt32(dataReader["MasterId"]);
                     row.PurchaseDate = Convert.ToDateTime(dataReader["PurchaseDate"]);
                     row.ServiceAmount = Convert.ToDecimal(dataReader["ServiceAmount"]);
                  
@@ -225,7 +231,5 @@ namespace BuroBeauty.Repositories.Implementation
             connection.Close();
             connection.Dispose();
         }
-
-        
     }
 }

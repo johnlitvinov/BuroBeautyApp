@@ -1,4 +1,4 @@
-﻿@model List<BuroBeauty.DB.Entities.OrderListItem>
+﻿@model List<BuroBeauty.DB.Entities.Dto.Master.MasterDayIncomeSummaryDto>
 
 <h2>Расчёт мастеров за день</h2>
 
@@ -10,8 +10,6 @@
 {
     <input type="text" autocomplete="false" id="datepicker" name="date" readonly="readonly" value="@ViewBag.SelectedDate.ToString("MM/dd/yyyy")" />
 }
-
-
 
 <table class="table">
     <style type="text/css">
@@ -41,9 +39,6 @@
             Мастер:
         </th>
         <th>
-            Дата:
-        </th>
-        <th>
             Общая сумма за день:
         </th>
         <th>
@@ -53,55 +48,46 @@
             Заработок Мастера за день:
         </th>
     </tr>
-
     @foreach (var item in Model)
     {
         <tr>
-           <td>
-        @Html.DisplayFor(modelItem => item.MasterFullName)
-           </td>
             <td>
-                @{
-                    string parameterValue = item.PurchaseDate.ToString("MM/dd/yyyy");
-                }
-                @Html.DisplayFor(modelItem => parameterValue)
+                @item.MasterFullName
             </td>
-
-         <td>
-                р.
-         </td>
-            
-        <td>
-         %
-        </td>
-            
-        <td>
-        р.
-        </td>
-
+            <td>
+                @item.TotalAmount р.
+            </td>
+            <td>
+                @item.Percent %
+            </td>
+            <td>
+                @item.AmountIncome р.
+            </td>
         </tr>
     }
-        <tr>
-
-            <td></td>
-            <td><b>Итого за день: </b></td>
-            <td> @ViewBag.Total р.</td>
-            <td></td>
-            <td> р. </td>
-        </tr>
-    </table>
+    <tr>
+        <td><b>Итого за день: </b></td>
+        <td> @ViewBag.Total р.</td>
+        <td> </td>
+        <td> @ViewBag.MastersTotal р.</td>
+    </tr>
+    <tr>
+        <td><b>Итого Бюро заработало за день: </b></td>
+        <td colspan="3"> @ViewBag.BuroTotal р.</td>
+    </tr>
+</table>
 
     @section head_scripts{
 
         <script>
-            $(function () {
+            $(function() {
                 $("#datepicker").datepicker();
             });
         </script>
 
         <script type="text/javascript">
-            $(document).ready(function () {
-                $("#datepicker").change(function () {
+            $(document).ready(function() {
+                $("#datepicker").change(function() {
                     $("#date_form").submit();
                 })
             })

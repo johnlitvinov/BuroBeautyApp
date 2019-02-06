@@ -19,7 +19,7 @@ namespace MyTestProject.Controllers
     [Authorize]
     public class OrderController : Controller
     {
-        private IOrderManager _orderManager;
+        private BuroBeauty.BLL.IOrderManager _orderManager;
         private IServiceManager _serviceManager;
         private IMasterManager _masterManager;
 
@@ -60,7 +60,6 @@ namespace MyTestProject.Controllers
             
             var items = _orderManager.GetOrdersByDate(date);
             ViewBag.Total = items.Sum(x => x.ServiceAmount);
-            date = DateTime.Now;
             ViewBag.SelectedDate = date;
             return View(items);
         }

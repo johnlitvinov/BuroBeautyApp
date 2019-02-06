@@ -9,7 +9,7 @@ using BuroBeauty.Repositories;
 
 namespace BuroBeauty.BLL.Implementation
 {
-    public class OrderManager : IOrderManager
+    public class OrderManager : BLL.IOrderManager
     {
         private readonly IOrderRepository _orderRepository;
 

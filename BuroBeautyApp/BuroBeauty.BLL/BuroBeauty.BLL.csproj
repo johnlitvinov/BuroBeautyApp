@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IMasterIncomeManager.cs" />
     <Compile Include="IMasterManager.cs" />
     <Compile Include="IOrderManager.cs" />
     <Compile Include="IServiceManager.cs" />

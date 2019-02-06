@@ -11,6 +11,7 @@ namespace BuroBeauty.DB.Entities
         public int Id { get; set; }
         public string ServiceName {get; set;}
         public string MasterFullName {get; set;}
+        public int? MasterId { get; set; }
         public DateTime PurchaseDate {get; set;}
         public decimal ServiceAmount {get; set;}
     }
