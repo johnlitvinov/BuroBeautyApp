@@ -11,58 +11,75 @@
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <h4></h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    
-    <div class="form-group">
-        <label class="control-label col-md-2" for="ServiceId">Наименование услуги</label>
-        <div class="col-md-10">
-            <select name="ServiceId" class="form-control">
-                @foreach (var service in (List<Service>)ViewBag.Services)
-                {
-                    <option value="@service.Id">@service.Name</option>
-                }
-            </select>
-        </div>
-    </div>
+    <div class="form-horizontal">
+        <h4></h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    <div class="form-group">
-        <label class="control-label col-md-2" for="MasterId">Мастер</label>
-        <div class="col-md-10">
-            <select name="MasterId" class="form-control">
-                <option value="" @(Model.MasterId == null ? "selected='selected'" : "")>-</option>
-                @foreach (var master in (List<Master>)ViewBag.Masters)
-                {
-                    <option value="@master.Id" @(Model.MasterId == master.Id ? "selected='selected'" : "")>@master.Name</option>
-                }
-            </select>
+        <div class="form-group">
+            <label class="control-label col-md-2" for="ServiceId">Наименование услуги</label>
+            <div class="col-md-10">
+                <select name="ServiceId" class="form-control">
+                    @foreach (var service in (List<Service>)ViewBag.Services)
+                    {
+                        <option value="@service.Id">@service.Name</option>
+                    }
+                </select>
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <label class="control-label col-md-2" for="ServiceAmount">Стоимость услуги</label>
-        <div class="col-md-10">
-            @Html.TextBoxFor(model=>model.ServiceAmount, new { @class= "form-control" })
+        <div class="form-group">
+            <label class="control-label col-md-2" for="MasterId">Мастер</label>
+            <div class="col-md-10">
+                <select name="MasterId" class="form-control">
+                    <option value="" @(Model.MasterId == null ? "selected='selected'" : "")>-</option>
+                    @foreach (var master in (List<Master>)ViewBag.Masters)
+                    {
+                        <option value="@master.Id" @(Model.MasterId == master.Id ? "selected='selected'" : "")>@master.Name</option>
+                    }
+                </select>
+            </div>
         </div>
-    </div>
-    
-    <div class="form-group">
-        <label class="control-label col-md-2" for="PurchaseDate">Дата</label>
-        <div class="col-md-10">
-            <input class="form-control"  id="PurchaseDate" name="PurchaseDate" value="@Model.PurchaseDate.ToString("yyyy-MM-dd")" >
-        </div>
-    </div>
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Изменить услугу" class="btn btn-default" />
+        <div class="form-group">
+            <label class="control-label col-md-2" for="ServiceAmount">Стоимость услуги</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.ServiceAmount, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="PurchaseDate">Дата</label>
+            <div class="col-md-10">
+                @*<input class="form-control" id="PurchaseDate" name="PurchaseDate" value="@Model.PurchaseDate.ToString("yyyy-MM-dd")">*@
+                <input type="text" class="form-control" autocomplete="false" id="datepicker" name="date" readonly="readonly" value="@Model.PurchaseDate.ToString("MM/dd/yyyy")" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Изменить услугу" class="btn btn-default" />
+            </div>
         </div>
     </div>
-</div>
 
 }
 <div>
     @Html.ActionLink("Вернуться назад", "Index")
 </div>
+
+@section head_scripts{
+    <script>
+        $( function() {
+            $( "#datepicker" ).datepicker();
+        } );
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#datepicker").change(function () {
+                $("#date_form").submit();
+            })
+        })
+    </script>
+}

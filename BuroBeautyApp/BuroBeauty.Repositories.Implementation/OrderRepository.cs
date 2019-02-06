@@ -84,7 +84,7 @@ namespace BuroBeauty.Repositories.Implementation
                 result = new OrderDetails();
                 result.Id = Convert.ToInt32(dataReader["OrderId"]);
                 result.ServiceId = Convert.ToInt32(dataReader["ServiceId"]);
-                result.MasterId = Convert.ToInt32(dataReader["MasterId"]);
+                result.MasterId = dataReader["MasterId"] is DBNull ? null : (int?)Convert.ToInt32(dataReader["MasterId"]);
                 result.PurchaseDate = Convert.ToDateTime(dataReader["PurchaseDate"]);
                 result.ServiceAmount = Convert.ToDecimal(dataReader["ServiceAmount"]);
                 result.ServiceName = dataReader["ServiceName"].ToString();
@@ -112,7 +112,7 @@ namespace BuroBeauty.Repositories.Implementation
 
             if (date != null)
             {
-                sqlQuery += string.Format(" where PurchaseDate between '{0}' AND '{1}'", date.Value.ToString("yyyy-MM-dd"), date.Value.AddDays(1).ToString("yyyy-MM-dd"));
+                sqlQuery += string.Format(" where PurchaseDate between '{0}' AND '{1}'", date.Value.ToString("MM/dd/yyyy"), date.Value.AddDays(1).ToString("MM/dd/yyyy"));
             }
 
             //Create and open a connection to SQL Server 
@@ -150,7 +150,7 @@ namespace BuroBeauty.Repositories.Implementation
                                             "SELECT SCOPE_IDENTITY()",
                 order.ServiceId,
                 order.MasterId == null ? "NULL" : order.MasterId.ToString(),
-                order.PurchaseDate.ToString("yyyy-MM-dd"),
+                order.PurchaseDate.ToString("MM/dd/yyyy"),
                 order.ServiceAmount);
 
             //Create and open a connection to SQL Server 
@@ -184,7 +184,7 @@ namespace BuroBeauty.Repositories.Implementation
                                             "where ID = {4}",
                                             order.MasterId == null ? "NULL" : order.MasterId.ToString(),
                                             order.ServiceId,
-                                            order.PurchaseDate.ToString("yyyy-MM-dd"),
+                                            order.PurchaseDate.ToString("MM/dd/yyyy"),
                                             order.ServiceAmount, 
                                             order.Id);
 

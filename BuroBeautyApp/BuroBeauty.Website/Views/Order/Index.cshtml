@@ -5,21 +5,24 @@
 
 <h5>Nail,Brow,Eyelashes</h5>
 
-
-
 @using (Html.BeginForm("Index", "Order", FormMethod.Post, new
 {
-    @id = "date_form", autocomplete = "off"}))
+    @id = "date_form",
+    autocomplete = "off"
+}))
 {
     <input type="text" autocomplete="false" id="datepicker" name="date" readonly="readonly" value="@ViewBag.SelectedDate.ToString("MM/dd/yyyy")" />
 }
 
+<p style="top:30%; left:73%" >
+    @Html.ActionLink("Добавить услугу", "Create",null,new Dictionary<string, object>()
+    {
+        {"style" , "margin-right: 20px;"  }
+    })
 
-
-
-<p style="top:30%; left:73%">
-    @Html.ActionLink("Добавить новую услугу", "Create")
+    @Html.ActionLink("Расчет Мастера", "Index", "CalculationOfMasters")
 </p>
+
 
 <table class="table">
     <style type="text/css">
@@ -70,12 +73,12 @@
                 @Html.DisplayFor(modelItem => item.ServiceName)
             </td>
             <td>
-                
+
                 @{
-                    string parameterValue = item.PurchaseDate.ToString("yyyy-MM-dd"); 
+                    string parameterValue = item.PurchaseDate.ToString("MM/dd/yyyy");
                 }
-                @Html.DisplayFor(modelItem=>parameterValue)
-                
+                @Html.DisplayFor(modelItem => parameterValue)
+
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ServiceAmount)  р.
@@ -85,7 +88,7 @@
             </td>
             <td>
                 <u> @Html.ActionLink("Редактировать", "Edit", new { id = item.Id })</u>
-                <u> @Html.ActionLink("Детали", "Details", new { id = item.Id })</u>
+                @*<u> @Html.ActionLink("Детали", "Details", new { id = item.Id })</u>*@
                 <u> @Html.ActionLink("Удалить", "Delete", new { id = item.Id })</u>
             </td>
         </tr>
@@ -99,15 +102,13 @@
 </table>
 
 @section head_scripts{
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    
     <script>
-        $( function() {
-            $( "#datepicker" ).datepicker();
-        } );
+        $(function () {
+            $("#datepicker").datepicker();
+        });
     </script>
-   
+
     <script type="text/javascript">
         $(document).ready(function () {
             $("#datepicker").change(function () {
