@@ -18,7 +18,6 @@ namespace BuroBeauty.Repositories.Implementation
 
         public List<Service> GetAllservices()
         {
-            //Create the SQL Query for returning an article category based on its primary key
             string sqlQuery = "SELECT * from [dbo].[Service]";
             return base.SelectList<Service>(sqlQuery, (dataReader) =>
             {
@@ -31,8 +30,6 @@ namespace BuroBeauty.Repositories.Implementation
         
         public Service GetServiceById(int? id)
         {
-            //Create the SQL Query for returning an article category based on its primary key
-            string sqlQuery = "SELECT * from [dbo].[Service] where Id = " + id;
             return SelectSingle<Service>(sqlQuery, (dataReader) =>
             {
                 var row = new Service();
@@ -54,7 +51,6 @@ namespace BuroBeauty.Repositories.Implementation
 
         public void UpdateService(Service service)
         {
-            //Create the SQL Query for deleting an article
             string sqlQuery = String.Format("Update [dbo].[Service] SET " +
                                             "Name = '{0}' " +
                                             "Where ID = {1}",
@@ -66,7 +62,6 @@ namespace BuroBeauty.Repositories.Implementation
     
         public void DeleteService(int? id)
         {
-            //Create the SQL Query for deleting an article
             string sqlQuery = string.Format("DELETE from [dbo].[Service] where Id = {0}", id);
 
             base.Delete(sqlQuery);

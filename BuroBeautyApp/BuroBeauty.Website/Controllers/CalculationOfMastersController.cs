@@ -21,17 +21,18 @@ namespace BuroBeauty.Website.Controllers
         private IMasterManager _masterManager;
         private IMasterIncomeManager _masterIncomeManager;
 
-        public CalculationOfMastersController()
+        public CalculationOfMastersController(
+            IOrderManager orderManager,
+            IServiceManager serviceManager,
+            IMasterManager masterManager)
         {
-            IRepositorySettingsProvider settingsProvider = new RepositorySettingsProvider();
-            IOrderRepository orderRepository = new OrderRepository(settingsProvider);
-            _orderManager = new OrderManager(orderRepository);
+           
+            _orderManager = orderManager;
 
-            IServiceRepository serviceRepository = new ServiceRepository(settingsProvider);
-            _serviceManager = new ServiceManager(serviceRepository);
+           
+            _serviceManager = serviceManager;
 
-            IMasterRepository masterRepository = new MasterRepository(settingsProvider);
-            _masterManager = new MasterManager(masterRepository);
+            _masterManager = masterManager;
 
             _masterIncomeManager = new MasterIncomeManager(_orderManager, _masterManager);
         }

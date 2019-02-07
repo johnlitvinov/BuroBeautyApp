@@ -19,7 +19,6 @@ namespace BuroBeauty.Repositories.Implementation
         
         public Order GetOrderById(int? id)
         {
-            //Create the SQL Query for returning an article category based on its primary key
             string sqlQuery = "SELECT * from [dbo].[Order] where ID = " + id;
 
             return SelectSingle<Order>(sqlQuery, (dataReader) =>
@@ -38,7 +37,6 @@ namespace BuroBeauty.Repositories.Implementation
 
         public OrderDetails GetOrderDetailsById(int? id)
         {
-            //Create the SQL Query for returning an article category based on its primary key
             string sqlQuery = @"SELECT 
                                   o.ID as OrderId,
                                   s.Id as ServiceId,
@@ -52,7 +50,7 @@ namespace BuroBeauty.Repositories.Implementation
                                   INNER JOIN [dbo].[Service] as s ON  o.[ServiceId] = s.[Id]
                                   where o.ID = " + id;
 
-            return SelectSingleDeteils<OrderDetails>(sqlQuery, (dataReader) =>
+            return SelectSingle<OrderDetails>(sqlQuery, (dataReader) =>
             {
                 var result = new OrderDetails();
                 result.Id = Convert.ToInt32(dataReader["OrderId"]);
@@ -72,7 +70,6 @@ namespace BuroBeauty.Repositories.Implementation
 
         public List<OrderListItem> GetOrdersByDate(DateTime? date)
         {
-            //Create the SQL Query for returning an article category based on its primary key
             string sqlQuery = @"SELECT 
                                   o.ID as OrderId,
                                   s.Name as ServiceName,
@@ -122,7 +119,6 @@ namespace BuroBeauty.Repositories.Implementation
         
         public void UpdateOrder(Order order)
         {
-            //Create the SQL Query for deleting an article
             string sqlQuery = String.Format("Update [dbo].[Order] SET " +
                                             "MasterId = {0}, " +
                                             "ServiceId = {1}, " +
@@ -140,7 +136,6 @@ namespace BuroBeauty.Repositories.Implementation
 
         public void DeleteOrder(int? id)
         {
-            //Create the SQL Query for deleting an article
             string sqlQuery = String.Format("DELETE from [dbo].[Order] where Id = '{0}'", id);
 
             base.Delete(sqlQuery);

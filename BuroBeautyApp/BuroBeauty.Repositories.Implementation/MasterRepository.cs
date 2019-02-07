@@ -33,7 +33,6 @@ namespace BuroBeauty.Repositories.Implementation
     
         public Master GetMasterById(int? id)
         {
-            //Create the SQL Query for returning an article category based on its primary key
             string sqlQuery = "SELECT * from [dbo].[Master] where ID = " + id;
 
             return SelectSingle<Master>(sqlQuery, (dataReader) =>
@@ -64,8 +63,7 @@ namespace BuroBeauty.Repositories.Implementation
         }
 
         public void UpdateMaster(Master master)
-        {
-            //Create the SQL Query for deleting an article
+        { 
             string sqlQuery = String.Format("Update [dbo].[Master] SET " +
                                             "Name = '{0}', " +
                                             "FullName = '{1}', " +
@@ -83,7 +81,6 @@ namespace BuroBeauty.Repositories.Implementation
 
         public void DeleteMaster(int? id)
         {
-            //Create the SQL Query for deleting an article
             string sqlQuery = String.Format("DELETE from [dbo].[Master] " +
                                             "where Id = {0}", id);
             base.Delete(sqlQuery);
