@@ -57,6 +57,7 @@ namespace MyTestProject.Controllers
             {
                 return Index();
             }
+
             
             var items = _orderManager.GetOrdersByDate(date);
             ViewBag.Total = items.Sum(x => x.ServiceAmount);
@@ -97,7 +98,7 @@ namespace MyTestProject.Controllers
             if (ModelState.IsValid)
             {
                 
-                order.PurchaseDate = DateTime.Now;
+                 order.PurchaseDate = DateTime.Now;
                 _orderManager.CreateOrder(order);
 
                 return RedirectToAction("Index");

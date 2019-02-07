@@ -34,7 +34,7 @@ namespace BuroBeauty.BLL.Implementation
             for (int i = 0; i < mastersIds.Count; i++)
             {
                 var masterId = mastersIds[i];
-                var master = _masterManager.GetMasterrById(masterId);
+                var master = _masterManager.GetMasterById(masterId);
                 masterDict.Add((int)masterId, master);
             }
 

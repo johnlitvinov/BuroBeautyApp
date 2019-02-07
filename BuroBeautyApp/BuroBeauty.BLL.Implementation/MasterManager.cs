@@ -28,7 +28,7 @@ namespace BuroBeauty.BLL.Implementation
             return _masterRepository.CreateMaster(master);
         }
 
-        public Master GetMasterrById(int? id)
+        public Master GetMasterById(int? id)
         {
             return _masterRepository.GetMasterById(id);
         }
