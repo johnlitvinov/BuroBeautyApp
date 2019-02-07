@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BuroBeauty.DB.Entities;
 
 namespace BuroBeauty.Repositories.Implementation
 {
@@ -122,6 +123,26 @@ namespace BuroBeauty.Repositories.Implementation
             command.Dispose();
             connection.Close();
             connection.Dispose();
+        }
+       
+        protected T SelectSingleDeteils<T>(string sqlQuery, Func<SqlDataReader, T> rowInitializer)
+        {
+            T result = default(T);
+
+            //Create and open a connection to SQL Server 
+            SqlConnection connection = new SqlConnection(_connectionString);
+           connection.Open();
+
+           SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+           SqlDataReader dataReader = command.ExecuteReader();
+           if (dataReader.HasRows)
+           {
+               dataReader.Read();
+               result = rowInitializer(dataReader);
+           }
+           connection.Close();
+           return result;
         }
     }
 }

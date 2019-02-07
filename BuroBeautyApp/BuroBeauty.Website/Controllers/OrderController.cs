@@ -23,17 +23,14 @@ namespace MyTestProject.Controllers
         private IServiceManager _serviceManager;
         private IMasterManager _masterManager;
 
-        public OrderController()
+        public OrderController(
+            IOrderManager orderManager,
+            IServiceManager serviceManager,
+            IMasterManager masterManager)
         {
-            IRepositorySettingsProvider settingsProvider = new RepositorySettingsProvider();
-            IOrderRepository orderRepository = new OrderRepository(settingsProvider);
-            _orderManager = new OrderManager(orderRepository);
-
-            IServiceRepository serviceRepository = new ServiceRepository(settingsProvider);
-            _serviceManager= new ServiceManager(serviceRepository);
-
-            IMasterRepository masterRepository = new MasterRepository(settingsProvider);
-            _masterManager = new MasterManager(masterRepository);
+            _orderManager = orderManager;
+            _serviceManager= serviceManager;
+            _masterManager = masterManager;
         }
 
         // GET: SoldServices
@@ -98,7 +95,6 @@ namespace MyTestProject.Controllers
             if (ModelState.IsValid)
             {
                 
-                 order.PurchaseDate = DateTime.Now;
                 _orderManager.CreateOrder(order);
 
                 return RedirectToAction("Index");

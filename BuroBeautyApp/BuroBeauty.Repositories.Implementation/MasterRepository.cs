@@ -31,7 +31,6 @@ namespace BuroBeauty.Repositories.Implementation
             });
         }
     
-
         public Master GetMasterById(int? id)
         {
             //Create the SQL Query for returning an article category based on its primary key

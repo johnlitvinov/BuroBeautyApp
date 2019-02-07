@@ -14,6 +14,7 @@ namespace BuroBeauty.BLL.Implementation
     {
         private readonly IOrderManager _orderManager;
         private readonly IMasterManager _masterManager;
+        
 
         public MasterIncomeManager(
             IOrderManager orderManager,

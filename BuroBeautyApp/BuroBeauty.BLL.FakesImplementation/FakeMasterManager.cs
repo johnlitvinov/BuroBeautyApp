@@ -26,7 +26,12 @@ namespace BuroBeauty.BLL.FakesImplementation
 
         public Master GetMasterById(int? id)
         {
-            throw new NotImplementedException();
+            switch (id)
+            {
+                case 1: return new Master(){Percent = 30}; break;
+                case 2: return new Master(){ Percent = 50}; break;
+                default: throw new Exception(" Can not find id " + id);
+            }
         }
 
         public void UpdateMaster(Master master)

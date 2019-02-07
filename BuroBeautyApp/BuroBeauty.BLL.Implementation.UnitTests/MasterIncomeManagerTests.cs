@@ -25,11 +25,13 @@ namespace BuroBeauty.BLL.Implementation.UnitTests
         }
 
         [TestMethod]
-        public void GetAllMastersIncomeByDateTest()
+        public void GetAllMastersIncomeByDateTestSearchByDate()
         {
             var result = _masterIncomeManager.GetAllMastersIncomeByDate(new DateTime(2019, 1, 1));
 
             Assert.IsNotNull(result);
+            Assert.IsNotNull(result.Count == 1);
+            Assert.IsNotNull(result[0].AmountIncome == (decimal)13.5);
         }
     }
 }

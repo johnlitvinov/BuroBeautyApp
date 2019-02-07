@@ -15,11 +15,14 @@ namespace BuroBeauty.Website.Controllers
     {
         private readonly IMasterManager _masterManager;
 
-        public HomeController()
+        public HomeController(
+            IMasterManager masterManager
+           )
         {
-            IRepositorySettingsProvider settingsProvider = new RepositorySettingsProvider();
-            IMasterRepository masterRepository = new MasterRepository(settingsProvider);
-            _masterManager = new MasterManager(masterRepository);
+            _masterManager = masterManager;
+            //IRepositorySettingsProvider settingsProvider = new RepositorySettingsProvider();
+            //IMasterRepository masterRepository = new MasterRepository(settingsProvider);
+            //_masterManager = new MasterManager(masterRepository);
         }
 
 
