@@ -24,17 +24,13 @@ namespace BuroBeauty.Website.Controllers
         public CalculationOfMastersController(
             IOrderManager orderManager,
             IServiceManager serviceManager,
-            IMasterManager masterManager)
+            IMasterManager masterManager,
+            IMasterIncomeManager masterIncomeManager)
         {
-           
             _orderManager = orderManager;
-
-           
             _serviceManager = serviceManager;
-
             _masterManager = masterManager;
-
-            _masterIncomeManager = new MasterIncomeManager(_orderManager, _masterManager);
+            _masterIncomeManager = masterIncomeManager;
         }
 
         // GET: CalculationOfMasters
