@@ -12,7 +12,7 @@ using BuroBeauty.DB.Entities;
 using BuroBeauty.Repositories;
 using BuroBeauty.Repositories.Implementation;
 using Microsoft.Ajax.Utilities;
-
+using NLog;
 
 namespace MyTestProject.Controllers
 {
@@ -36,6 +36,13 @@ namespace MyTestProject.Controllers
         // GET: SoldServices
         public ActionResult Index()
         {
+            Logger log = LogManager.GetCurrentClassLogger();
+            log.Trace("trace message");
+            log.Debug("debug message");
+            log.Info("info message");
+            log.Warn("warn message");
+            log.Error("error message");
+            log.Fatal("fatal message");
             // Подсчет суммы 
             var selectedDate = DateTime.Now;
             var items = _orderManager.GetOrdersByDate(selectedDate);
@@ -172,13 +179,6 @@ namespace MyTestProject.Controllers
             return RedirectToAction("Index");
         }
 
-       // protected override void Dispose(bool disposing)
-       // {
-       //    if (disposing)
-       //    {
-       //       db.Dispose();
-       //    }
-       //    base.Dispose(disposing);
-       //}
+       
     }
 }

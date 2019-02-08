@@ -124,6 +124,5 @@ namespace BuroBeauty.Repositories.Implementation
             connection.Close();
             connection.Dispose();
         }
-       
     }
 }

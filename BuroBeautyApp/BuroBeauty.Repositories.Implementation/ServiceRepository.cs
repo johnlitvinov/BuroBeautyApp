@@ -30,6 +30,7 @@ namespace BuroBeauty.Repositories.Implementation
         
         public Service GetServiceById(int? id)
         {
+            string sqlQuery = "SELECT * from [dbo].[Service] where Id = " + id;
             return SelectSingle<Service>(sqlQuery, (dataReader) =>
             {
                 var row = new Service();
