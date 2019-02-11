@@ -159,8 +159,13 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="images\29094453_568004773561469_180335368837529600_n.jpg" />
+    <Content Include="images\34884636_1693409887374377_917520390132072448_n.jpg" />
+    <Content Include="images\35520448_416098162206735_897118659820912640_n.jpg" />
+    <Content Include="images\37868579_214309805905670_6908316425870376960_n %281%29.jpg" />
     <Content Include="images\43241123_337618520149193_6912501582199932065_n.jpg" />
     <Content Include="images\46390554_232757400771666_8363624353957603370_n.jpg" />
+    <Content Include="images\49907469_2353546548235537_2479994832858681431_n.jpg" />
     <Content Include="images\51135414_2643569662350577_6643536790388152507_n.jpg" />
     <Content Include="images\IMG_1713.jpg" />
     <Content Include="images\IMG_1824.jpg" />
@@ -168,6 +173,7 @@
     <Content Include="images\PHOTO-2019-01-30-15-11-49.jpg" />
     <Content Include="images\photo22.jpg" />
     <Content Include="images\photo_2019-02-10_20-07-13.jpg" />
+    <Content Include="images\photo_2019-02-10_20-07-57.jpg" />
     <Content Include="images\WhatsApp Image 2018-01-14 at 20.56.44.jpeg" />
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\hammer.min.js" />
