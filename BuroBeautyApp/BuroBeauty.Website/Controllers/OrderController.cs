@@ -49,8 +49,17 @@ namespace MyTestProject.Controllers
             ViewBag.Total = items.Sum(x => x.ServiceAmount);
             ViewBag.SelectedDate = selectedDate;
 
+            try
+            {
+                throw new Exception("Bad ");
+                log.Info("Everything works well");
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex, "Something bad happened");
+            }
 
-         return View(items );
+            return View(items );
         }
 
         [HttpPost]
