@@ -1,7 +1,5 @@
-﻿
-<div id="rec87336157" class="r t-rec t-rec_pt_90 t-rec_pb_90" style="padding-top:90px;padding-bottom:90px; " data-record-type="412">
+﻿<div id="rec87336157" class="r t-rec t-rec_pt_90 t-rec_pb_90" style="padding-top:90px;padding-bottom:90px; " data-record-type="412">
     <!-- T412 -->
-
 
     <div class="t412">
         <div class="t-container">
@@ -36,30 +34,23 @@
     </div>
 
     <script type="text/javascript">
-
-
-            $(document).ready(function () {
+        $(document).ready(function () {
+            t412_unifyHeights('87336157');
+            setTimeout(function () {
                 t412_unifyHeights('87336157');
-                setTimeout(function () {
-                    t412_unifyHeights('87336157');
-                }, 500);
+            }, 500);
+        });
 
-            });
+        $('.t412').bind('displayChanged', function () {
+            t412_unifyHeights('87336157');
+        });
 
-            $('.t412').bind('displayChanged', function () {
-                t412_unifyHeights('87336157');
-            });
+        $(window).resize(function () {
+            t412_unifyHeights('87336157');
+        });
 
-            $(window).resize(function () {
-                t412_unifyHeights('87336157');
-            });
-
-            $(window).load(function () {
-                t412_unifyHeights('87336157');
-            });
-
-
+        $(window).load(function () {
+            t412_unifyHeights('87336157');
+        });
     </script>
-
-
 </div>
