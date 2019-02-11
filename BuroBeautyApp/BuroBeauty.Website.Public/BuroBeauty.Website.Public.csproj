@@ -159,6 +159,16 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="images\43241123_337618520149193_6912501582199932065_n.jpg" />
+    <Content Include="images\46390554_232757400771666_8363624353957603370_n.jpg" />
+    <Content Include="images\51135414_2643569662350577_6643536790388152507_n.jpg" />
+    <Content Include="images\IMG_1713.jpg" />
+    <Content Include="images\IMG_1824.jpg" />
+    <Content Include="images\Map.jpg" />
+    <Content Include="images\PHOTO-2019-01-30-15-11-49.jpg" />
+    <Content Include="images\photo22.jpg" />
+    <Content Include="images\photo_2019-02-10_20-07-13.jpg" />
+    <Content Include="images\WhatsApp Image 2018-01-14 at 20.56.44.jpeg" />
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\hammer.min.js" />
     <Content Include="js\highlight.min.js" />
@@ -219,6 +229,7 @@
     <Content Include="Views\Home\_LocalMap.cshtml" />
     <Content Include="Views\Home\_Footer.cshtml" />
     <Content Include="Views\Home\_LinkToSocialNetwork.cshtml" />
+    <Content Include="Views\Home\_FooterScripts.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
