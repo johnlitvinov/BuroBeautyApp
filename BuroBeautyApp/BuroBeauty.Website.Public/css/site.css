@@ -1,0 +1,27 @@
+﻿@media screen and (max-width: 980px) {
+#rec87215366 .t446__leftcontainer{
+    padding: 20px;
+}
+}
+@media screen and (max-width: 980px) {
+    #rec87215366 .t446__imglogo{
+        padding: 20px 0;
+    }
+}
+
+#rec87215366 .t-menu__link-item{
+       -webkit-transition: color 0.3s ease-in-out, opacity 0.3s ease-in-out;
+       transition: color 0.3s ease-in-out, opacity 0.3s ease-in-out;
+   }
+#rec87215366 .t-menu__link-item.t-active{
+    color:#b87528 !important;    opacity:1 !important;}
+
+
+@supports (overflow:-webkit-marquee) and (justify-content:inherit)
+{
+    #rec87215366 .t-menu__link-item,
+    #rec87215366 .t-menu__link-item.t-active {
+        opacity: 1 !important;
+    }
+}
+
