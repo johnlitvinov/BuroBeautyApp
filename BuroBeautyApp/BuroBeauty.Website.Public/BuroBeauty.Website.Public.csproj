@@ -155,7 +155,9 @@
     <Content Include="css\tooltipster.min.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="images\12.jpg" />
     <Content Include="images\124034.png" />
+    <Content Include="images\1600900white.jpg" />
     <Content Include="images\16801280.jpg" />
     <Content Include="images\34568265_2175145069375595_2760302505349873664_n.jpg" />
     <Content Include="images\43241123_337618520149193_6912501582199932065_n.jpg" />
@@ -170,11 +172,15 @@
     <Content Include="images\icon-1562139_1280.png" />
     <Content Include="images\IMG_1713.jpg" />
     <Content Include="images\IMG_1824.jpg" />
+    <Content Include="images\IMG_18245.jpg" />
     <Content Include="images\instagram.png" />
     <Content Include="images\instagramMain.jpg" />
     <Content Include="images\kisspng-viber-whatsapp-instant-messaging-messaging-apps-an-viber-5acf6d9d76f204.8090042815235434534872.jpg" />
     <Content Include="images\Map22.jpg" />
     <Content Include="images\PHOTO-2019-01-30-15-11-49.jpg" />
+    <Content Include="images\PHOTO-2hv019-01-30-15-11-49.jpg" />
+    <Content Include="images\photo.jpg" />
+    <Content Include="images\photo1600x900.jpg" />
     <Content Include="images\photo22.jpg" />
     <Content Include="images\photo_2019-02-10_20-07-13.jpg" />
     <Content Include="images\viberMain.jpg" />
